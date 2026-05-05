@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Inspecting thermodynamic databases</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/customized_mystnb.css?v=0eb7c136" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/basics/inspecting-databases';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/customize.js?v=7a8fad8a"></script>
+    <link rel="canonical" href="https://reaktoro.org/tutorials/basics/inspecting-databases.html" />
+    <link rel="icon" href="../../_static/reaktoro-logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Defining chemical systems" href="defining-chemical-systems.html" />
+    <link rel="prev" title="Loading thermodynamic databases" href="loading-databases.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/reaktoro-for-python-and-cpp.svg" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../_static/reaktoro-for-python-and-cpp-dark-mode.svg" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/index.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-conda.html">Installation using Conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-cmake.html">Installation using CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-in-google-colab.html">Installation in Google Colab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/api">API Reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/v1">Reaktoro v1</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="importing-reaktoro.html">Importing Reaktoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading-databases.html">Loading thermodynamic databases</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Inspecting thermodynamic databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defining-chemical-systems.html">Defining chemical systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating-chemical-states.html">Creating chemical states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-chemical-properties.html">Computing chemical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-aqueous-properties.html">Computing aqueous properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-thermo-props-of-species.html">Computing standard thermodynamic properties of species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-thermo-props-of-reactions.html">Computing standard thermodynamic properties of reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="specifying-activity-models.html">Specifying activity models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defining-materials.html">Defining materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../equilibrium/index.html">Chemical Equilibrium</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-basics.html">Chemical equilibrium: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-specifying-constraints.html">Chemical equilibrium with constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph.html">Chemical equilibrium with fixed pH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph-charge-balance.html">Chemical equilibrium with fixed pH and charge balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-phase-amount.html">Chemical equilibrium with fixed phase amount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-fugacity.html">Chemical equilibrium with fixed fugacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-volume-internal-energy.html">Chemical equilibrium with fixed volume and internal energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-custom-constraints.html">Chemical equilibrium with custom constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-given-component-amounts.html">Chemical equilibrium with given element and charge amounts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-basics.html">Chemical kinetics: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-minerals-using-palandri-kharaka-model.html">Chemical kinetics for mineral reactions using Palandri-Kharaka model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced/index.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/creating-custom-databases.html">Creating thermodynamic databases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/solubility/index.html">Solubility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-calcite-on-acidity-and-temperature.html">Calcite solubility in water, rainwater, and seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-co2-on-salinity-and-temperature.html">Carbon-dioxide solubility in brines with different salinity and temperature</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geochemistry/index.html">Geochemistry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-co2-addition-in-seawater.html">Carbon dioxide (CO₂) dissolution in seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-contaminants-in-water.html">pH-dependence on added contaminants in water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/evian-water-analysis.html">Analysis of the Evian water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/opening-bottle-with-sparkling-water.html">Opening bottle with sparkling water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/uraniun-speciation-vs-pH.html">Uranium (VI) speciation as a function of pH at fixed CO<sub>2</sub> partial pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/cement-simulation-with-solid-solutions.html">The effect of limestone addition on a hydrated cement mix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-dune-sand.html">Ion exchange in dune sand and groundwater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-mix-porewater-extractant.html">Extraction of exchangeable cations in dune sand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-cax2-nax-kx-vs-changing-ca-k.html">Cation exchange competition among Na<sup>+</sup>, K<sup>+</sup> and Ca<sup>2+</sup></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-calcite-cax-vs-ph.html">Effect of calcite dissolution on exchangeable cations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geobiology/index.html">Geobiology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-streammodel-fixed-fugacity.html">Carbonate-rich lakes modeling on the early Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-phreeqc-fixed-fugacity.html">Phosphate accumulation in carbonate-rich brines</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/biomass-gasification/index.html">Biomass Gasification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/biomass-gasification/biomass-gasification.html">Biomass Gasification</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../general/citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/license.html">License</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/basics/inspecting-databases.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Inspecting thermodynamic databases</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database">Inspecting the species in the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database-with-given-chemical-elements">Inspecting the species in the database with given chemical elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database-with-given-aggregate-state">Inspecting the species in the database with given aggregate state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-elements-in-the-database">Inspecting the elements in the database</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="inspecting-thermodynamic-databases">
+<h1>Inspecting thermodynamic databases<a class="headerlink" href="#inspecting-thermodynamic-databases" title="Link to this heading">#</a></h1>
+<p>This tutorial demonstrates how a thermodynamic database can be inspected programmatically using Reaktoro’s Python API. For this, we will consider the <a class="reference external" href="https://www.empa.ch/web/s308/cemdata">cemdata18</a> database supported in <a class="reference external" href="https://thermohub.org/thermofun/thermofun/">ThermoFun</a>.</p>
+<p>So, let’s get started by creating an object of class <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ThermoFunDatabase.html"><code class="docutils literal notranslate"><span class="pre">ThermoFunDatabase</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reaktoro</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ThermoFunDatabase</span><span class="p">(</span><span class="s2">&quot;cemdata18&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use this <code class="docutils literal notranslate"><span class="pre">db</span></code> object throughout this tutorial to demonstrate all inspection capabilities available in class <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1Database.html"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a> (yes, <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ThermoFunDatabase.html"><code class="docutils literal notranslate"><span class="pre">ThermoFunDatabase</span></code></a> is a derived class from <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1Database.html"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a>)!</p>
+<section id="inspecting-the-species-in-the-database">
+<h2>Inspecting the species in the database<a class="headerlink" href="#inspecting-the-species-in-the-database" title="Link to this heading">#</a></h2>
+<p>Let’s loop through all species in this database object and print its name, chemical formula, and molar mass:</p>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Species&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="s1">&#39;Formula&#39;</span><span class="si">:</span><span class="s2">&lt;60</span><span class="si">}{</span><span class="s1">&#39;Molar Mass (kg/mol)&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">db</span><span class="p">.</span><span class="nf">species</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="n">species</span><span class="p">.</span><span class="nf">formula</span><span class="p">()</span><span class="o">.</span><span class="nf">str</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;60</span><span class="si">}{</span><span class="n">species</span><span class="p">.</span><span class="nf">molarMass</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;20.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Species             Formula                                                     Molar Mass (kg/mol) 
+5CA                 (CaO)1.25(SiO2)1(Al2O3)0.125(H2O)1.625                      0.172201            
+5CNA                (CaO)1.25(SiO2)1(Al2O3)0.125(Na2O)0.25(H2O)1.375            0.183192            
+Al(SO4)+            Al(SO4)+                                                    0.123046            
+Al(SO4)2-           Al(SO4)2-                                                   0.219111            
+Al+3                Al+3                                                        0.026980            
+AlO+                AlO+                                                        0.042980            
+AlO2-               AlO2-                                                       0.058981            
+AlO2H@              AlO2H@                                                      0.059988            
+AlOH+2              Al(OH)+2                                                    0.043988            
+AlOHam              Al(OH)3                                                     0.078004            
+AlOHmic             Al(OH)3                                                     0.078004            
+AlSiO5-3            AlSiO5-3                                                    0.135066            
+Amor-Sl             SiO2                                                        0.060084            
+Anh                 CaSO4                                                       0.136143            
+Arg                 CaCO3                                                       0.100087            
+Brc                 Mg(OH)2                                                     0.058320            
+C12A7               (CaO)12(Al2O3)7                                             1.386658            
+C2AClH5             Ca2AlCl(OH)6(H2O)2                                          0.280665            
+C2AH65              Ca2Al(OH)7(H2O)3                                            0.280235            
+C2AH7.5             Ca2Al2(OH)10(H2O)2.5                                        0.349231            
+C2S                 (CaO)2SiO2                                                  0.172239            
+C3A                 (CaO)3Al2O3                                                 0.270193            
+C3AFS0.84H4.32      (AlFe|3|O3)[Ca3O3(SiO2)0.84(H2O)4.32]                       0.427354            
+C3AH6               Ca3Al2O6(H2O)6                                              0.378285            
+C3AS0.41H5.18       Ca3Al2O6(SiO2)0.41(H2O)5.18                                 0.388147            
+C3AS0.84H4.32       (AlAlO3)[Ca3O3(SiO2)0.84(H2O)4.32]                          0.398490            
+C3FH6               Ca3Fe|3|2O6(H2O)6                                           0.436012            
+C3FS0.84H4.32       (Fe|3|Fe|3|O3)[Ca3O3(SiO2)0.84(H2O)4.32]                    0.456217            
+C3FS1.34H3.32       Ca3Fe|3|2O6(SiO2)1.34(H2O)3.32                              0.468244            
+C3S                 (CaO)3SiO2                                                  0.228316            
+C4AClH10            Ca4Al2Cl2(OH)12(H2O)4                                       0.561330            
+C4AF                (CaO)4(Al2O3)(Fe|3|2O3)                                     0.485959            
+C4AH11              Ca4Al2(OH)14(H2O)4                                          0.524439            
+C4AH13              Ca4Al2(OH)14(H2O)6                                          0.560470            
+C4AH19              Ca4Al2(OH)14(H2O)12                                         0.668562            
+C4AsClH12           Ca4Al2Cl(SO4)0.5(OH)12(H2O)6                                0.609940            
+C4FH13              Ca4Fe|3|2(OH)14(H2O)6                                       0.618197            
+CA                  CaOAl2O3                                                    0.158039            
+CA2                 CaO(Al2O3)2                                                 0.260000            
+CAH10               CaOAl2O3(H2O)10                                             0.338192            
+CH4                 C|-4|H4                                                     0.016043            
+CH4@                C|-4|H4@                                                    0.016043            
+CO2                 CO2                                                         0.044010            
+CO2@                CO2@                                                        0.044010            
+CO3-2               CO3-2                                                       0.060010            
+CSH3T-T2C           ((CaO)0.75(SiO2)0.5(H2O)1.25)2                              0.189239            
+CSH3T-T5C           ((CaO)1(SiO2)1(H2O)2)1.25                                   0.190240            
+CSH3T-TobH          (CaO)1(SiO2)1.5(H2O)2.5                                     0.191242            
+CSHQ-JenD           (CaO)1.5(SiO2)0.6667(H2O)2.5                                0.169213            
+CSHQ-JenH           (CaO)1.3333(SiO2)1(H2O)2.1667                               0.173886            
+CSHQ-TobD           ((CaO)1.25(SiO2)1(H2O)2.75)0.6667                           0.119821            
+CSHQ-TobH           (CaO)0.6667(SiO2)1(H2O)1.5                                  0.124494            
+Ca(CO3)@            CaCO3@                                                      0.100087            
+Ca(HCO3)+           Ca(HCO3)+                                                   0.101094            
+Ca(HSiO3)+          Ca(HSiO3)+                                                  0.117169            
+Ca(SO4)@            CaSO4@                                                      0.136143            
+Ca+2                Ca+2                                                        0.040077            
+CaOH+               Ca(OH)+                                                     0.057085            
+CaSiO3@             CaSiO3@                                                     0.116162            
+Cal                 CaCO3                                                       0.100087            
+Cl-                 Cl-                                                         0.035454            
+ClO4-               Cl|7|O4-                                                    0.099451            
+Cls                 SrSO4                                                       0.183685            
+Dis-Dol             CaMg(CO3)2                                                  0.184401            
+ECSH1-KSH           ((KOH)2.5SiO2H2O)0.2                                        0.043673            
+ECSH1-NaSH          ((NaOH)2.5SiO2H2O)0.2                                       0.035618            
+ECSH1-SH            (SiO2H2O)1                                                  0.078100            
+ECSH1-SrSH          ((Sr(OH)2)1SiO2H2O)1                                        0.199734            
+ECSH1-TobCa         ((Ca(OH)2)0.8333SiO2H2O)1                                   0.139841            
+ECSH2-JenCa         ((Ca(OH)2)1.6667SiO2H2O)0.6                                 0.120954            
+ECSH2-KSH           ((KOH)2.5SiO2H2O)0.2                                        0.043673            
+ECSH2-NaSH          ((NaOH)2.5SiO2H2O)0.2                                       0.035618            
+ECSH2-SrSH          ((Sr(OH)2)1SiO2H2O)1                                        0.199734            
+ECSH2-SrSH(ACW)     ((Sr(OH)2)1SiO2H2O)1                                        0.199734            
+ECSH2-TobCa         ((Ca(OH)2)0.8333SiO2H2O)1                                   0.139841            
+Ettringite13_des    Ca6Al2(SO4)3(OH)12(H2O)7                                    0.912820            
+Ettringite9_des     Ca6Al2(SO4)3(OH)12(H2O)3                                    0.840759            
+Fe                  Fe|0|                                                       0.055845            
+Fe(CO3)@            FeCO3@                                                      0.115854            
+Fe(HCO3)+           FeHCO3+                                                     0.116861            
+Fe(HSO4)+           FeHSO4+                                                     0.152917            
+Fe(HSO4)+2          Fe|3|HSO4+2                                                 0.152916            
+Fe(SO4)+            Fe|3|(SO4)+                                                 0.151909            
+Fe(SO4)2-           Fe|3|(SO4)2-                                                0.247975            
+Fe(SO4)@            Fe(SO4)@                                                    0.151910            
+Fe+2                Fe+2                                                        0.055844            
+Fe+3                Fe|3|+3                                                     0.055843            
+Fe-ettringite       Ca6Fe|3|2(SO4)3(OH)12(H2O)26                                1.312838            
+Fe-ettringite05     Ca3Fe|3|(SO4)1.5(OH)6(H2O)13                                0.656419            
+Fe-hemicarbonate    Ca3O3Fe|3|2O3(CaCO3)0.5(CaO2H2)0.5(H2O)9.5                  0.586156            
+Fe-monosulph05      Ca2Fe|3|S0.5O5(H2O)6                                        0.340123            
+Fe-monosulphate     Ca4Fe|3|2SO10(H2O)12                                        0.680247            
+FeCl+               FeCl+                                                       0.091297            
+FeCl+2              Fe|3|Cl+2                                                   0.091297            
+FeCl2+              Fe|3|Cl2+                                                   0.126750            
+FeCl3@              Fe|3|Cl3@                                                   0.162204            
+FeO+                Fe|3|O+                                                     0.071844            
+FeO2-               Fe|3|O2-                                                    0.087844            
+FeO2H@              Fe|3|O2H@                                                   0.088852            
+FeOH+               FeOH+                                                       0.072852            
+FeOH+2              Fe|3|(OH)+2                                                 0.072851            
+FeOOHmic            Fe|3|OOH                                                    0.088852            
+Femonocarbonate     Ca4O4Fe|3|2O3CO2(H2O)12                                     0.644191            
+Gbs                 Al(OH)3                                                     0.078004            
+Gp                  CaSO4(H2O)2                                                 0.172173            
+Gr                  C|0|                                                        0.012011            
+Gt                  Fe|3|O(OH)                                                  0.088852            
+H+                  H+                                                          0.001007            
+H2                  H|0|2                                                       0.002016            
+H2@                 H|0|2@                                                      0.002016            
+H2O                 H2O                                                         0.018015            
+H2O@                H2O@                                                        0.018015            
+H2S                 H2S|-2|                                                     0.034083            
+H2S@                H2S|-2|@                                                    0.034083            
+HCN@                HC|-1|N|0|@                                                 0.027025            
+HCO3-               HCO3-                                                       0.061017            
+HS-                 HS|-2|-                                                     0.033075            
+HSO3-               HS|4|O3-                                                    0.081074            
+HSO4-               HS|6|O4-                                                    0.097073            
+HSiO3-              HSiO3-                                                      0.077092            
+Hem                 Fe|3|2O3                                                    0.159688            
+INFCA               (CaO)1(SiO2)1.1875(Al2O3)0.15625(H2O)1.65625                0.173197            
+INFCN               (CaO)1(SiO2)1.5(Na2O)0.3125(H2O)1.1875                      0.186965            
+INFCNA              (CaO)1(SiO2)1.1875(Al2O3)0.15625(Na2O)0.34375(H2O)1.3125    0.188309            
+Jennite             (SiO2)1(CaO)1.666667(H2O)2.1                                0.191379            
+K(SO4)-             KSO4-                                                       0.135163            
+K+                  K+                                                          0.039098            
+K2O                 K2O                                                         0.094196            
+K2SO4               K2SO4                                                       0.174261            
+KOH@                KOH@                                                        0.056106            
+KSiOH               ((KOH)2.5SiO2H2O)0.2                                        0.043673            
+Kln                 Al2Si2O5(OH)4                                               0.258160            
+Lim                 CaO                                                         0.056077            
+M075SH              Mg1.5Si2O5.5(H2O)2.5                                        0.225663            
+M15SH               Mg1.5SiO3.5(H2O)2.5                                         0.165579            
+M4A-OH-LDH          Mg4Al2(OH)14(H2O)3                                          0.443332            
+M6A-OH-LDH          Mg6Al2(OH)18(H2O)3                                          0.559971            
+M8A-OH-LDH          Mg8Al2(OH)22(H2O)3                                          0.676611            
+Mag                 FeFe|3|2O4                                                  0.231533            
+Melanterite         FeSO4(H2O)7                                                 0.278017            
+Mg(CO3)@            Mg(CO3)@                                                    0.084314            
+Mg(HCO3)+           Mg(HCO3)+                                                   0.085321            
+Mg(HSiO3)+          Mg(HSiO3)+                                                  0.101396            
+Mg+2                Mg+2                                                        0.024304            
+Mg2AlC0.5OH         Mg2Al(OH)6(CO3)0.5(H2O)2                                    0.243671            
+Mg2FeC0.5OH         Mg2Fe|3|(OH)6(CO3)0.5(H2O)2                                 0.272534            
+Mg3AlC0.5OH         Mg3Al(OH)8(CO3)0.5(H2O)2.5                                  0.310998            
+Mg3FeC0.5OH         Mg3Fe|3|(OH)8(CO3)0.5(H2O)2.5                               0.339862            
+MgOH+               Mg(OH)+                                                     0.041312            
+MgSO4@              Mg(SO4)@                                                    0.120370            
+Mgs                 MgCO3                                                       0.084314            
+N2                  N|0|2                                                       0.028013            
+N2@                 N|0|2@                                                      0.028013            
+NH3@                N|-3|H3@                                                    0.017031            
+NH4+                N|-3|H4+                                                    0.018038            
+NO3-                NO3-                                                        0.062005            
+Na(CO3)-            NaCO3-                                                      0.082999            
+Na(HCO3)@           NaHCO3@                                                     0.084007            
+Na(SO4)-            Na(SO4)-                                                    0.119055            
+Na+                 Na+                                                         0.022989            
+Na2O                Na2O                                                        0.061979            
+Na2SO4              Na2SO4                                                      0.142044            
+NaOH@               NaOH@                                                       0.039997            
+NaSiOH              ((NaOH)2.5SiO2H2O)0.2                                       0.035618            
+O2                  O|0|2                                                       0.031999            
+O2@                 O|0|2@                                                      0.031999            
+OH-                 OH-                                                         0.017008            
+Ord-Dol             CaMg(CO3)2                                                  0.184401            
+Portlandite         Ca(OH)2                                                     0.074093            
+Py                  FeS|0|S|-2|                                                 0.119979            
+Qtz                 SiO2                                                        0.060084            
+S2O3-2              S|2|2O3-2                                                   0.112133            
+SCN-                S|0|C|0|N|-1|-                                              0.058085            
+SO3-2               S|4|O3-2                                                    0.080066            
+SO4-2               S|6|O4-2                                                    0.096066            
+Sd                  FeCO3                                                       0.115854            
+Si4O10-4            Si4O10-4                                                    0.272338            
+SiO2@               SiO2@                                                       0.060084            
+SiO3-2              SiO3-2                                                      0.076085            
+Sr(CO3)@            Sr(CO3)@                                                    0.147629            
+Sr(HCO3)+           SrHCO3+                                                     0.148636            
+Sr(SO4)@            Sr(SO4)@                                                    0.183685            
+Sr+2                Sr+2                                                        0.087619            
+SrOH+               Sr(OH)+                                                     0.104627            
+SrSiO3@             SrSiO3@                                                     0.163704            
+Str                 SrCO3                                                       0.147629            
+Sulfur              S|0|                                                        0.032067            
+T2C-CNASHss         (CaO)1.5(SiO2)1(H2O)2.5                                     0.189239            
+T5C-CNASHss         (CaO)1.25(SiO2)1.25(H2O)2.5                                 0.190240            
+Tob-I               (SiO2)2.4(CaO)2(H2O)3.2                                     0.314006            
+Tob-II              (SiO2)1(CaO)0.833333(H2O)1.333333                           0.130836            
+TobH-CNASHss        (CaO)1(SiO2)1.5(H2O)2.5                                     0.191242            
+Tro                 Fe|2|S|-2|                                                  0.087912            
+chabazite           Ca(Al2Si4)O12(H2O)6                                         0.506468            
+ettringite          ((H2O)2)Ca6Al2(SO4)3(OH)12(H2O)24                           1.255111            
+ettringite03_ss     (SO4)Ca2Al0.6666667(OH)4(H2O)8.6666667                      0.418370            
+ettringite05        Ca3Al(SO4)1.5(OH)6(H2O)13                                   0.627555            
+ettringite13        Ca6Al2(SO4)3(OH)12(H2O)7                                    0.912820            
+ettringite30        Ca6Al2(SO4)3(OH)12(H2O)24                                   1.219080            
+ettringite9         Ca6Al2(SO4)3(OH)12(H2O)3                                    0.840759            
+ettringite_ss       {SO4}3:Ca6Al2(OH)12(H2O)26                                  1.255111            
+hemicarbonat10.5    (CaO)3Al2O3(CaCO3)0.5(CaO2H2)0.5(H2O)10                     0.537436            
+hemicarbonate       (CaO)3Al2O3(CaCO3)0.5(CaO2H2)0.5(H2O)11.5                   0.564459            
+hemicarbonate9      (CaO)3Al2O3(CaCO3)0.5(CaO2H2)0.5(H2O)8.5                    0.510413            
+hemihydrate         CaSO4(H2O)0.5                                               0.145150            
+hydrotalcite        Mg4Al2O7(H2O)10                                             0.443332            
+monocarbonate       Ca4Al2CO9(H2O)11                                            0.568449            
+monocarbonate05     Ca2AlC0.5O4.5(H2O)5.5                                       0.284224            
+monocarbonate9      Ca4Al2CO9(H2O)9                                             0.532418            
+mononitrate         Ca4Al2(OH)12N|5|2O6(H2O)4                                   0.614434            
+mononitrite         Ca4Al2(OH)12N|3|2O4(H2O)4                                   0.582435            
+monosulphate10.5    Ca4Al2SO10(H2O)10.5                                         0.595497            
+monosulphate12      Ca4Al2SO10(H2O)12                                           0.622520            
+monosulphate1205    Ca2AlS0.5O5(H2O)6                                           0.311260            
+monosulphate14      Ca4Al2SO10(H2O)14                                           0.658550            
+monosulphate16      Ca4Al2SO10(H2O)16                                           0.694581            
+monosulphate9       Ca4Al2SO10(H2O)9                                            0.568474            
+natrolite           Na2(Al2Si3)O10(H2O)2                                        0.380224            
+straetlingite       Ca2Al2SiO7(H2O)8                                            0.418323            
+straetlingite5.5    Ca2Al2SiO7(H2O)5.5                                          0.373285            
+straetlingite7      Ca2Al2SiO7(H2O)7                                            0.400307            
+syngenite           K2Ca(SO4)2H2O                                               0.328419            
+thaumasite          (CaSiO3)(CaSO4)(CaCO3)(H2O)15                               0.622621            
+tricarboalu         {CO3}3:Ca6Al2(OH)12(H2O)26                                  1.146944            
+tricarboalu03       (CO3)Ca2Al0.6666667(OH)4(H2O)8.6666667                      0.382315            
+zeoliteP_Ca         Ca(Al2Si2)O8(H2O)4.5                                        0.359276            
+zeoliteX            Na2(Al2Si2.5)O9(H2O)6.2                                     0.425846            
+zeoliteY            Na2(Al2Si4)O12(H2O)8                                        0.548400            
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-the-species-in-the-database-with-given-chemical-elements">
+<h2>Inspecting the species in the database with given chemical elements<a class="headerlink" href="#inspecting-the-species-in-the-database-with-given-chemical-elements" title="Link to this heading">#</a></h2>
+<p>Often, we are not interested in all species in a database, but only in those that contain some chemical elements. We show below how the species that can be formed from the elements H, O, C, and Ca can be collected and printed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">db</span><span class="p">.</span><span class="nf">species</span><span class="p">()</span><span class="o">.</span><span class="nf">withElements</span><span class="p">(</span><span class="s2">&quot;H O C Ca&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arg
+CH4
+CH4@
+CO2
+CO2@
+CO3-2
+Ca(CO3)@
+Ca(HCO3)+
+Ca+2
+CaOH+
+Cal
+Gr
+H+
+H2
+H2@
+H2O
+H2O@
+HCO3-
+Lim
+O2
+O2@
+OH-
+Portlandite
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-the-species-in-the-database-with-given-aggregate-state">
+<h2>Inspecting the species in the database with given aggregate state<a class="headerlink" href="#inspecting-the-species-in-the-database-with-given-aggregate-state" title="Link to this heading">#</a></h2>
+<p>What if we want to collect only gaseous species from a database? Check next:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">db</span><span class="p">.</span><span class="nf">speciesWithAggregateState</span><span class="p">(</span><span class="n">AggregateState</span><span class="o">.</span><span class="n">Gas</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CH4
+CO2
+H2
+H2O
+H2S
+N2
+O2
+</pre></div>
+</div>
+</div>
+</div>
+<p>And what if only gases with C, H, O elements?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">db</span><span class="p">.</span><span class="nf">speciesWithAggregateState</span><span class="p">(</span><span class="n">AggregateState</span><span class="o">.</span><span class="n">Gas</span><span class="p">)</span><span class="o">.</span><span class="nf">withElements</span><span class="p">(</span><span class="s2">&quot;C H O&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CH4
+CO2
+H2
+H2O
+O2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-the-elements-in-the-database">
+<h2>Inspecting the elements in the database<a class="headerlink" href="#inspecting-the-elements-in-the-database" title="Link to this heading">#</a></h2>
+<p>We can also check all the chemical elements available in the database:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Symbol&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="s1">&#39;Molar Mass (kg/mol)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">db</span><span class="p">.</span><span class="nf">elements</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="p">.</span><span class="nf">symbol</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="n">element</span><span class="p">.</span><span class="nf">molarMass</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;10.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Symbol    Molar Mass (kg/mol)
+Al        0.026982  
+Ca        0.040078  
+H         0.001008  
+O         0.015999  
+Si        0.028086  
+Na        0.022990  
+S         0.032067  
+C         0.012011  
+Mg        0.024305  
+Cl        0.035453  
+Fe        0.055845  
+Sr        0.087620  
+K         0.039098  
+N         0.014007  
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it. You should now be able to load and inspect databases in Reaktoro the way you want!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You might want to check the API documentation of all Reaktoro components (classes and their methods) used in this tutorial:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1Database.html"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1Element.html"><code class="docutils literal notranslate"><span class="pre">Element</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1Species.html"><code class="docutils literal notranslate"><span class="pre">Species</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1SpeciesList.html"><code class="docutils literal notranslate"><span class="pre">SpeciesList</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ElementList.html"><code class="docutils literal notranslate"><span class="pre">ElementList</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ChemicalFormula.html"><code class="docutils literal notranslate"><span class="pre">ChemicalFormula</span></code></a></p></li>
+<li><p><a class="reference external" href="https://reaktoro.org/api/namespaceReaktoro.html#a02ae90aadc24dbff1702399a9c3ca1cd"><code class="docutils literal notranslate"><span class="pre">AggregateState</span></code></a></p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="loading-databases.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Loading thermodynamic databases</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="defining-chemical-systems.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Defining chemical systems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database">Inspecting the species in the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database-with-given-chemical-elements">Inspecting the species in the database with given chemical elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-species-in-the-database-with-given-aggregate-state">Inspecting the species in the database with given aggregate state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-elements-in-the-database">Inspecting the elements in the database</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Specifying activity models</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/customized_mystnb.css?v=0eb7c136" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/basics/specifying-activity-models';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/customize.js?v=7a8fad8a"></script>
+    <link rel="canonical" href="https://reaktoro.org/tutorials/basics/specifying-activity-models.html" />
+    <link rel="icon" href="../../_static/reaktoro-logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Defining materials" href="defining-materials.html" />
+    <link rel="prev" title="Computing standard thermodynamic properties of reactions" href="computing-thermo-props-of-reactions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/reaktoro-for-python-and-cpp.svg" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../_static/reaktoro-for-python-and-cpp-dark-mode.svg" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/index.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-conda.html">Installation using Conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-cmake.html">Installation using CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-in-google-colab.html">Installation in Google Colab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/api">API Reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/v1">Reaktoro v1</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="importing-reaktoro.html">Importing Reaktoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading-databases.html">Loading thermodynamic databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting-databases.html">Inspecting thermodynamic databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defining-chemical-systems.html">Defining chemical systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating-chemical-states.html">Creating chemical states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-chemical-properties.html">Computing chemical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-aqueous-properties.html">Computing aqueous properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-thermo-props-of-species.html">Computing standard thermodynamic properties of species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing-thermo-props-of-reactions.html">Computing standard thermodynamic properties of reactions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Specifying activity models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defining-materials.html">Defining materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../equilibrium/index.html">Chemical Equilibrium</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-basics.html">Chemical equilibrium: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-specifying-constraints.html">Chemical equilibrium with constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph.html">Chemical equilibrium with fixed pH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph-charge-balance.html">Chemical equilibrium with fixed pH and charge balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-phase-amount.html">Chemical equilibrium with fixed phase amount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-fugacity.html">Chemical equilibrium with fixed fugacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-fixed-volume-internal-energy.html">Chemical equilibrium with fixed volume and internal energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-custom-constraints.html">Chemical equilibrium with custom constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium/equilibrium-with-given-component-amounts.html">Chemical equilibrium with given element and charge amounts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-basics.html">Chemical kinetics: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-minerals-using-palandri-kharaka-model.html">Chemical kinetics for mineral reactions using Palandri-Kharaka model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced/index.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/creating-custom-databases.html">Creating thermodynamic databases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/solubility/index.html">Solubility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-calcite-on-acidity-and-temperature.html">Calcite solubility in water, rainwater, and seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-co2-on-salinity-and-temperature.html">Carbon-dioxide solubility in brines with different salinity and temperature</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geochemistry/index.html">Geochemistry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-co2-addition-in-seawater.html">Carbon dioxide (CO₂) dissolution in seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-contaminants-in-water.html">pH-dependence on added contaminants in water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/evian-water-analysis.html">Analysis of the Evian water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/opening-bottle-with-sparkling-water.html">Opening bottle with sparkling water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/uraniun-speciation-vs-pH.html">Uranium (VI) speciation as a function of pH at fixed CO<sub>2</sub> partial pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/cement-simulation-with-solid-solutions.html">The effect of limestone addition on a hydrated cement mix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-dune-sand.html">Ion exchange in dune sand and groundwater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-mix-porewater-extractant.html">Extraction of exchangeable cations in dune sand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-cax2-nax-kx-vs-changing-ca-k.html">Cation exchange competition among Na<sup>+</sup>, K<sup>+</sup> and Ca<sup>2+</sup></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-calcite-cax-vs-ph.html">Effect of calcite dissolution on exchangeable cations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geobiology/index.html">Geobiology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-streammodel-fixed-fugacity.html">Carbonate-rich lakes modeling on the early Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-phreeqc-fixed-fugacity.html">Phosphate accumulation in carbonate-rich brines</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/biomass-gasification/index.html">Biomass Gasification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/biomass-gasification/biomass-gasification.html">Biomass Gasification</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../general/citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/license.html">License</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/basics/specifying-activity-models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Specifying activity models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-aqueous-phases">Specifying activity models for aqueous phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-gaseous-and-liquid-phases">Specifying activity models for gaseous and liquid phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-pure-mineral-and-condensed-phases">Specifying activity models for pure mineral and condensed phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-solid-solution-phases">Specifying activity models for solid solution phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-ion-exchange-phases">Specifying activity models for ion exchange phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="specifying-activity-models">
+<h1>Specifying activity models<a class="headerlink" href="#specifying-activity-models" title="Link to this heading">#</a></h1>
+<p>Activity models are needed to accurately represent the non-ideal thermodynamic behavior of aqueous, liquid, gaseous, solid, and plasma phases. They are required when computing thermodynamic properties of phases and their species, such as molar enthalpies, molar heat capacities, molar volume, molar entropies, molar internal energies, species activities, species chemical potentials, etc.. These properties can only be accurate if proper activity models are assigned to the phases. For example, for an aqueous solution at extreme saline conditions, an activity model designed for low salinity conditions will not perform well.</p>
+<p>In Reaktoro, an activity model assigned to a phase <span class="math notranslate nohighlight">\(\pi\)</span> is a function for which the following inputs are given:</p>
+<ul class="simple">
+<li><p>temperature (in K), <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>pressure (in Pa), <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p>mole fractions of the species in phase <span class="math notranslate nohighlight">\(\pi\)</span>, <span class="math notranslate nohighlight">\(x=(x_1,\ldots,x_\mathrm{N_{\pi}})\)</span></p></li>
+</ul>
+<p>The evaluation of this activity model produces the following <em>primary excess/residual thermodynamic properties</em> for the corresponding phase and its species:</p>
+<ul class="simple">
+<li><p>the excess/residual molar Gibbs energy of the phase (in units of J/mol), <span class="math notranslate nohighlight">\(G_\mathrm{ex}\)</span></p></li>
+<li><p>the excess/residual molar enthalpy of the phase (in units of J/mol), <span class="math notranslate nohighlight">\(H_\mathrm{ex}\)</span></p></li>
+<li><p>the excess/residual molar volume of the phase (in m<sup>3</sup>/mol), <span class="math notranslate nohighlight">\(V_\mathrm{ex}\)</span></p></li>
+<li><p>the temperature derivative of the excess/residual molar volume at constant pressure (in m<sup>3</sup>/(mol·K)), <span class="math notranslate nohighlight">\((\partial V_\mathrm{ex}/\partial T)_P\)</span></p></li>
+<li><p>the pressure derivative of the excess/residual molar volume at constant temperature (in m<sup>3</sup>/(mol·Pa)), <span class="math notranslate nohighlight">\((\partial V_\mathrm{ex}/\partial P)_T\)</span></p></li>
+<li><p>the excess/residual molar isobaric heat capacity of the phase (in units of J/(mol·K)), <span class="math notranslate nohighlight">\(C_{P,\mathrm{ex}}\)</span></p></li>
+<li><p>the activity coefficient <span class="math notranslate nohighlight">\(\gamma_i\)</span> of every species in the phase, for <span class="math notranslate nohighlight">\(i=1,\ldots,\mathrm{N_{\pi}}\)</span></p></li>
+<li><p>the activity <span class="math notranslate nohighlight">\(a_i\)</span> of every species in the phase, for <span class="math notranslate nohighlight">\(i=1,\ldots,\mathrm{N_{\pi}}\)</span></p></li>
+</ul>
+<p>Once we have computed these <em>primary excess/residual thermodynamic properties</em>, we can determine all others if needed (i.e., the <em>secondary excess/residual thermodynamic properties</em>). For example, the excess internal energy can be computed as <span class="math notranslate nohighlight">\(U_\mathrm{ex} = H_\mathrm{ex} - P V_\mathrm{ex}\)</span>.</p>
+<p>By default, all phases in Reaktoro are created with <em>ideal activity models</em> if not explicitly specified. The ideal models produce zero excess/residual properties for the phase and unit activity coefficients (thus, no correction for the non-ideal thermodynamic behavior of phases).</p>
+<p>The code block that we present below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reaktoro</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">PhreeqcDatabase</span><span class="p">(</span><span class="s2">&quot;phreeqc.dat&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl C Ca Mg&quot;</span><span class="p">))</span>
+<span class="n">gases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GaseousPhase</span><span class="p">(</span><span class="s2">&quot;CO2(g) H2O(g)&quot;</span><span class="p">)</span>
+<span class="n">solidsolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MineralPhase</span><span class="p">(</span><span class="s2">&quot;Siderite Rhodochrosite&quot;</span><span class="p">)</span>
+<span class="n">ionexchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IonExchangePhase</span><span class="p">(</span><span class="s2">&quot;NaX CaX2&quot;</span><span class="p">)</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">,</span> <span class="n">gases</span><span class="p">,</span> <span class="n">solidsolution</span><span class="p">,</span> <span class="n">ionexchange</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>is thus equivalent to this one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reaktoro</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">PhreeqcDatabase</span><span class="p">(</span><span class="s2">&quot;phreeqc.dat&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl C Ca Mg&quot;</span><span class="p">))</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelIdealAqueous</span><span class="p">())</span>
+
+<span class="n">gases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GaseousPhase</span><span class="p">(</span><span class="s2">&quot;CO2(g) H2O(g)&quot;</span><span class="p">)</span>
+<span class="n">gases</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelIdealGas</span><span class="p">())</span>
+
+<span class="n">solidsolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MineralPhase</span><span class="p">(</span><span class="s2">&quot;Siderite Rhodochrosite&quot;</span><span class="p">)</span>
+<span class="n">solidsolution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelIdealSolution</span><span class="p">(</span><span class="n">StateOfMatter</span><span class="o">.</span><span class="n">Solid</span><span class="p">))</span>
+
+<span class="n">ionexchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IonExchangePhase</span><span class="p">(</span><span class="s2">&quot;NaX CaX2&quot;</span><span class="p">)</span>
+<span class="n">ionexchange</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelIdealIonExchange</span><span class="p">())</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">,</span> <span class="n">gases</span><span class="p">,</span> <span class="n">solidsolution</span><span class="p">,</span> <span class="n">ionexchange</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Non-ideal thermodynamic behavior is often what most phases present in most conditions. Therefore, it is imperative to properly select an activity model for a phase suitable for the conditions of interest. Because there is no model that works best for all conditions, we leave the choice for the user.</p>
+<p>We show in the following sections the available options for activity models for different phases and how to set and configure them.</p>
+<section id="specifying-activity-models-for-aqueous-phases">
+<h2>Specifying activity models for aqueous phases<a class="headerlink" href="#specifying-activity-models-for-aqueous-phases" title="Link to this heading">#</a></h2>
+<p>The following are additional activity models available for aqueous phases in Reaktoro:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDavies</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckelKielland</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckelLimitingLaw</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckelParams</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckelPHREEQC</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDebyeHuckelWATEQ4F</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelHKF</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPhreeqc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPitzer</span></code></p></li>
+</ul>
+<p>For example, the code block below will construct a chemical system with an aqueous phase that uses PHREEQC’s activity model to compute the activities of the aqueous species:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl&quot;</span><span class="p">))</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelPhreeqc</span><span class="p">(</span><span class="n">db</span><span class="p">))</span>  <span class="c1"># The PhreeqcDatabase object db contains the activity model parameters.</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensuring consistency between PHREEQC’s thermodynamic databases and activity models is of paramount importance when modeling geochemical reactions. By opting for <code class="docutils literal notranslate"><span class="pre">ActivityModelPhreeqc</span></code> in Reaktoro when defining an aqueous phase whose species come from a PHREEQC database, the computation of the aqueous species activities mirrors that of PHREEQC, employing either the WATEQ-Debye-Hückel model <span id="id1">[<a class="reference internal" href="../bibliography.html#id676" title="A. H. Truesdell and B. F. Jones. WATEQ–A computer program for calculating chemical equilibrium of natural waters. U.S. Geological Survey, Journal of Research, 2(2):233–248, 1974.">Truesdell and Jones, 1974</a>]</span> or the LLNL model <span id="id2">[<a class="reference internal" href="../bibliography.html#id162" title="Thomas J Wolery. EQ3/6, A Software Package for Geochemical Modeling of Aqueous Systems: Package Overview and Installation Guide. Technical Report, Lawrence Livermore National Laboratory, Livermore, California, 1992.">Wolery, 1992</a>]</span>. For a more detailed understanding of these models, including certain decisions like employing Davies for charged species in the absence of parameters, we refer to <span id="id3">Parkhurst and Appelo [<a class="reference internal" href="../bibliography.html#id304" title="D.L. Parkhurst and C.A.J. Appelo. User's guide to PHREEQC (Version 2)—A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations. USGS Water-Resources Investigations Report, 99(4259):326, 1999.">1999</a>]</span> and <span id="id4">Parkhurst and Appelo [<a class="reference internal" href="../bibliography.html#id849" title="D.L. Parkhurst and C.A.J. Appelo. Description of input and examples for PHREEQC version 3—A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations. In Groundwater Book 6, Modeling Techniques, chapter A43, pages 497. U.S. Geological Survey Techniques and Methods, 2013. URL: http://pubs.usgs.gov/tm/06/a43.">2013</a>]</span>.</p>
+</div>
+<p>Let’s create a chemical state for this system (using <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ChemicalState.html"><code class="docutils literal notranslate"><span class="pre">ChemicalState</span></code></a> class), and set it so that we have a 1 molal NaCl saline solution. We then compute its chemical properties (using class <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ChemicalProps.html"><code class="docutils literal notranslate"><span class="pre">ChemicalProps</span></code></a>) and print the activity coefficients, <span class="math notranslate nohighlight">\(\gamma_i\)</span>, of the species.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Na+&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Cl-&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Species&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="s1">&#39;Activity Coefficient&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">system</span><span class="p">.</span><span class="nf">species</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="n">props</span><span class="p">.</span><span class="nf">speciesActivityCoefficient</span><span class="p">(</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Species             Activity Coefficient
+H+                  0.7431715908205375
+H2O                 1.000806912
+Cl-                 0.6086519103778879
+H2                  1.2589254117941673
+Na+                 0.7312452684857986
+OH-                 0.5790923293396838
+NaOH                1.2589254117941673
+O2                  1.2589254117941673
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note above that the activity coefficients for neutral species other than H<sub>2</sub>O are identical. This is because most aqueous activity models do not properly compute activity coefficients for these species (or their default variants do not contain model parameters for them).</p>
+<p>One way to overcome or improve this is to combine an aqueous activity model with <em>Setschenow model</em>, so that the following equation:</p>
+<div class="math notranslate nohighlight">
+\[\log_{10}\gamma_i = b_i I\]</div>
+<p>is used instead to compute the activity coefficient of a neutral species <span class="math notranslate nohighlight">\(i\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is the ionic strength of the solution and <span class="math notranslate nohighlight">\(b_i\)</span> is a <em>Setschenow constant</em>.</p>
+<p>We recreate the chemical system in the next code block in which a <em>chained activity model</em> is constructed so that the above Setschenow equation is applied for the activity coefficients of species <code class="docutils literal notranslate"><span class="pre">O2</span></code>, <code class="docutils literal notranslate"><span class="pre">H2</span></code>, and <code class="docutils literal notranslate"><span class="pre">NaOH</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl&quot;</span><span class="p">))</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nf">chain</span><span class="p">(</span>
+    <span class="n">ActivityModelHKF</span><span class="p">(),</span>
+    <span class="n">ActivityModelSetschenow</span><span class="p">(</span><span class="s2">&quot;O2&quot;</span><span class="p">,</span> <span class="mf">0.123</span><span class="p">),</span>
+    <span class="n">ActivityModelSetschenow</span><span class="p">(</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span> <span class="mf">0.234</span><span class="p">),</span>
+    <span class="n">ActivityModelSetschenow</span><span class="p">(</span><span class="s2">&quot;NaOH&quot;</span><span class="p">,</span> <span class="mf">0.345</span><span class="p">),</span>
+<span class="p">))</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then repeat the process of computing the chemical properties of the new system and printing the activity coefficients of the species:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Na+&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Cl-&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Species&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="s1">&#39;Activity Coefficient&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">system</span><span class="p">.</span><span class="nf">species</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}{</span><span class="n">props</span><span class="p">.</span><span class="nf">speciesActivityCoefficient</span><span class="p">(</span><span class="n">species</span><span class="p">.</span><span class="nf">name</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Species             Activity Coefficient
+H+                  0.6144274878149923
+H2O                 1.0014153316335355
+Cl-                 0.6651569578616804
+H2                  1.7139573075084253
+Na+                 0.6519897227119619
+OH-                 0.7188624482783554
+NaOH                2.2130947096056377
+O2                  1.3273944577297396
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the activity coefficients of <code class="docutils literal notranslate"><span class="pre">O2</span></code>, <code class="docutils literal notranslate"><span class="pre">H2</span></code>, and <code class="docutils literal notranslate"><span class="pre">NaOH</span></code> are now different from each other. No changes were applied to the activity coefficients of <code class="docutils literal notranslate"><span class="pre">H2O</span></code> and charged species.</p>
+<p>CO<sub>2</sub> is a common gas dissolved in aqueous solutions. Most of the activity models above also do not properly calculate the activity of this aqueous species (with exception of <code class="docutils literal notranslate"><span class="pre">ActivityModelPitzer</span></code>). Thus, when using such models, it is recommended to create a <em>chained activity model</em> in which one of the following models below are combined with one of the above:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDrummond</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelDuanSun</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelRumpf</span></code></p></li>
+</ul>
+<p>Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl C Ca Mg&quot;</span><span class="p">))</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nf">chain</span><span class="p">(</span>
+    <span class="n">ActivityModelHKF</span><span class="p">(),</span>
+    <span class="n">ActivityModelDrummond</span><span class="p">(</span><span class="s2">&quot;CO2&quot;</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the change above, the Drummond model <span id="id5">[<a class="reference internal" href="../bibliography.html#id651" title="S.E. Drummond. Boiling and mixing of hydrothermal fluids: chemical effects on mineral precipitation. Ph.D., Pennsylvania State University, 1981.">Drummond, 1981</a>]</span> will be used for the computation of the activity of CO<sub>2</sub> aqueous species (which can be named differently across the databases supported by Reaktoro, such as <code class="docutils literal notranslate"><span class="pre">CO2</span></code> in PHREEQC databases, <code class="docutils literal notranslate"><span class="pre">CO2(aq)</span></code> in SUPCRT/SUPCRTB databases, or <code class="docutils literal notranslate"><span class="pre">CO2&#64;</span></code> in ThermoFun databases).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When computing gas solubilities in aqueous saline solutions, it is important that the activity of the dissolved gas species (e.g., <code class="docutils literal notranslate"><span class="pre">CO2(aq)</span></code>) is adequately computed.</p>
+</div>
+</section>
+<section id="specifying-activity-models-for-gaseous-and-liquid-phases">
+<h2>Specifying activity models for gaseous and liquid phases<a class="headerlink" href="#specifying-activity-models-for-gaseous-and-liquid-phases" title="Link to this heading">#</a></h2>
+<p>Reaktoro implements a general form of the cubic equation of state (EOS) as presented in <span id="id6">Smith <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id59" title="Joseph Mauk Smith, Hendrick C Van Ness, and Michael M Abbott. Introduction to chemical engineering thermodynamics. McGraw-Hill, 2005. ISBN 0073104450.">2005</a>]</span> from which all classic cubic models are derived. You can assign one of the following models to a <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1GaseousPhase.html"><code class="docutils literal notranslate"><span class="pre">GaseousPhase</span></code></a> or <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1LiquidPhase.html"><code class="docutils literal notranslate"><span class="pre">LiquidPhase</span></code></a> object:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelVanDerWaals</span></code>  (<span id="id7">van der Waals [<a class="reference internal" href="../bibliography.html#id683" title="J. D. van der Waals. On the Continuity of the Gaseous and Liquid States. PhD thesis, Universiteit Leiden, 1873.">1873</a>]</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelRedlichKwong</span></code> (<span id="id8">Redlich and Kwong [<a class="reference internal" href="../bibliography.html#id890" title="Otto Redlich and J. N. S. Kwong. On the Thermodynamics of Solutions. V. An Equation of State. Fugacities of Gaseous Solutions. Chemical Reviews, 44(1):233–244, feb 1949. URL: http://dx.doi.org/10.1021/cr60137a013, doi:10.1021/cr60137a013.">1949</a>]</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelSoaveRedlichKwong</span></code>  (<span id="id9">Soave [<a class="reference internal" href="../bibliography.html#id167" title="Giorgio Soave. Equilibrium constants from a modified Redlich-Kwong equation of state. Chemical Engineering Science, 27(6):1197–1203, jun 1972. URL: http://linkinghub.elsevier.com/retrieve/pii/0009250972800964, doi:10.1016/0009-2509(72)80096-4.">1972</a>]</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson76</span></code> (<span id="id10">Peng and Robinson [<a class="reference internal" href="../bibliography.html#id763" title="Ding-Yu Peng and Donald B. Robinson. A New Two-Constant Equation of State. Industrial &amp; Engineering Chemistry Fundamentals, 15(1):59–64, feb 1976. URL: http://pubs.acs.org/doi/abs/10.1021/i160057a011, doi:10.1021/i160057a011.">1976</a>]</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson78</span></code> (<span id="id11">Robinson and Peng [<a class="reference internal" href="../bibliography.html#id3" title="D.B. Robinson and D.-Y. Peng. The Characterization of Heptanes and the Heavier Fractions. Technical Report, University of Alberta, Edmonton, Alberta, Canada, 1978.">1978</a>]</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson</span></code> (identical to <code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson78</span></code>)</p></li>
+</ul>
+<p>The following variants of the Peng-Robinson EOS are also supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinsonPhreeqc</span></code>, which combines <code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson</span></code> with binary interaction parameters used in PHREEQC <span id="id12">[<a class="reference internal" href="../bibliography.html#id849" title="D.L. Parkhurst and C.A.J. Appelo. Description of input and examples for PHREEQC version 3—A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations. In Groundwater Book 6, Modeling Techniques, chapter A43, pages 497. U.S. Geological Survey Techniques and Methods, 2013. URL: http://pubs.usgs.gov/tm/06/a43.">Parkhurst and Appelo, 2013</a>]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinsonSoreideWhitson</span></code>, which combines <code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinson</span></code> with binary interaction parameters from <span id="id13">Søreide and Whitson [<a class="reference internal" href="../bibliography.html#id2" title="I Søreide and H Curtis Whitson. Peng-Robinson predictions for hydrocarbons, CO2, N2, and H2S with pure water and NaCI brine. Fluid Phase Equilibria, 77(2):217–240, 1992. URL: http://linkinghub.elsevier.com/retrieve/pii/037838129285105H, doi:10.1016/0378-3812(92)85105-H.">1992</a>]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelPengRobinsonPhreeqcOriginal</span></code> which is a ported version of the implementation of the Peng-Robinson EOS in PHREEQC <span id="id14">[<a class="reference internal" href="../bibliography.html#id849" title="D.L. Parkhurst and C.A.J. Appelo. Description of input and examples for PHREEQC version 3—A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations. In Groundwater Book 6, Modeling Techniques, chapter A43, pages 497. U.S. Geological Survey Techniques and Methods, 2013. URL: http://pubs.usgs.gov/tm/06/a43.">Parkhurst and Appelo, 2013</a>]</span></p></li>
+</ul>
+<p>Reaktoro also implements some equations of state designed for specific gaseous phases:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelSpycherPruessEnnis</span></code> for H<sub>2</sub>O-CO<sub>2</sub> gas mixtures, <span id="id15">Spycher <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id722" title="Nicolas Spycher, Karsten Pruess, and Jonathan Ennis-King. CO2–H2O mixtures in the geological sequestration of CO2. I. Assessment and calculation of mutual solubilities from 12 to 100°C and up to 600 bar. Geochimica et Cosmochimica Acta, 67(16):3015–3031, 2003. URL: http://linkinghub.elsevier.com/retrieve/pii/S0016703703002734, doi:10.1016/S0016-7037(03)00273-4.">2003</a>]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelSpycherReed</span></code> for H<sub>2</sub>O-CO<sub>2</sub>-CH<sub>4</sub> gas mixtures, <span id="id16">Spycher and Reed [<a class="reference internal" href="../bibliography.html#id780" title="Nicolas F Spycher and Mark H Reed. Fugacity coefficients of H2, CO2, CH4, H2O and of H2O-CO2-CH4 mixtures: A virial equation treatment for moderate pressures and temperatures applicable to calculations of hydrothermal boiling. Geochimica et Cosmochimica Acta, 52(3):739–749, mar 1988. URL: http://linkinghub.elsevier.com/retrieve/pii/0016703788903341, doi:10.1016/0016-7037(88)90334-1.">1988</a>]</span></p></li>
+</ul>
+<p>The example below demonstrates the use of the Peng-Robinson EOS as the activity model for a gaseous phase:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GaseousPhase</span><span class="p">(</span><span class="s2">&quot;CO2(g) CH4(g) H2O(g) O2(g) H2(g)&quot;</span><span class="p">)</span>
+<span class="n">gases</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelPengRobinson</span><span class="p">())</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">gases</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create a chemical state for this system and compute its thermodynamic and chemical properties, from which we will obtain the fugacity coefficients of the gases:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;MPa&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;CO2(g)&quot;</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;CH4(g)&quot;</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2O(g)&quot;</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;O2(g)&quot;</span><span class="p">,</span>  <span class="mf">0.03</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2(g)&quot;</span><span class="p">,</span>  <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+
+<span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Gas&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="s1">&#39;Fugacity Coefficient&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">system</span><span class="p">.</span><span class="nf">species</span><span class="p">()</span><span class="o">.</span><span class="nf">size</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">system</span><span class="p">.</span><span class="nf">species</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="nf">name</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="n">props</span><span class="p">.</span><span class="nf">speciesActivityCoefficient</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gas       Fugacity Coefficient
+CO2(g)    0.9738114880582376
+CH4(g)    0.9927282935115731
+H2O(g)    0.9307234180901945
+O2(g)     1.0048772470887164
+H2(g)     1.0215793244862943
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note above that the method <code class="docutils literal notranslate"><span class="pre">ChemicalProps.speciesActivityCoefficient</span></code> is used for retrieving the fugacity coefficients of the gases. The <em>activity coefficient of a gas is identical to its fugacity coefficient</em>, and the <em>fugacity of a gas has identical value to its activity</em> when reference pressure is 1 bar, which is the case adopted in Reaktoro.</p>
+</div>
+<p>We print below the full computed properties of the system (in this case containing only a gaseous phase):</p>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------------------------------------+--------------+-----------+
+| Property                               |        Value |      Unit |
++----------------------------------------+--------------+-----------+
+| Temperature                            |     373.1500 |         K |
+| Pressure                               |      10.0000 |       bar |
+| Volume                                 |   3.0251e-03 |        m3 |
+| Gibbs Energy                           | -117619.4634 |         J |
+| Enthalpy                               |   16254.8858 |         J |
+| Entropy                                |     358.7682 |       J/K |
+| Internal Energy                        |   13229.8226 |         J |
+| Helmholtz Energy                       | -120644.5266 |         J |
+| Charge                                 |   0.0000e+00 |       mol |
+| Element Amount:                        |              |           |
+| :: H                                   |   5.4000e-01 |       mol |
+| :: C                                   |   9.0000e-01 |       mol |
+| :: O                                   |   1.7100e+00 |       mol |
+| Species Amount:                        |              |           |
+| :: CO2(g)                              |   8.0000e-01 |       mol |
+| :: CH4(g)                              |   1.0000e-01 |       mol |
+| :: H2O(g)                              |   5.0000e-02 |       mol |
+| :: O2(g)                               |   3.0000e-02 |       mol |
+| :: H2(g)                               |   2.0000e-02 |       mol |
+| Mole Fraction:                         |              |           |
+| :: CO2(g)                              |   8.0000e-01 |   mol/mol |
+| :: CH4(g)                              |   1.0000e-01 |   mol/mol |
+| :: H2O(g)                              |   5.0000e-02 |   mol/mol |
+| :: O2(g)                               |   3.0000e-02 |   mol/mol |
+| :: H2(g)                               |   2.0000e-02 |   mol/mol |
+| Activity Coefficient:                  |              |           |
+| :: CO2(g)                              |       0.9738 |         - |
+| :: CH4(g)                              |       0.9927 |         - |
+| :: H2O(g)                              |       0.9307 |         - |
+| :: O2(g)                               |       1.0049 |         - |
+| :: H2(g)                               |       1.0216 |         - |
+| Activity:                              |              |           |
+| :: CO2(g)                              |   7.7905e+00 |         - |
+| :: CH4(g)                              |   9.9273e-01 |         - |
+| :: H2O(g)                              |   4.6536e-01 |         - |
+| :: O2(g)                               |   3.0146e-01 |         - |
+| :: H2(g)                               |   2.0432e-01 |         - |
+| lg(Activity):                          |              |           |
+| :: CO2(g)                              |       0.8916 |         - |
+| :: CH4(g)                              |      -0.0032 |         - |
+| :: H2O(g)                              |      -0.3322 |         - |
+| :: O2(g)                               |      -0.5208 |         - |
+| :: H2(g)                               |      -0.6897 |         - |
+| ln(Activity):                          |              |           |
+| :: CO2(g)                              |       2.0529 |         - |
+| :: CH4(g)                              |      -0.0073 |         - |
+| :: H2O(g)                              |      -0.7649 |         - |
+| :: O2(g)                               |      -1.1991 |         - |
+| :: H2(g)                               |      -1.5881 |         - |
+| Chemical Potential:                    |              |           |
+| :: CO2(g)                              |  -1.2620e+05 |     J/mol |
+| :: CH4(g)                              |  -2.5059e+05 |     J/mol |
+| :: H2O(g)                              |  -2.3544e+03 |     J/mol |
+| :: O2(g)                               |   4.4707e+05 |     J/mol |
+| :: H2(g)                               |  -2.7242e+03 |     J/mol |
+| Standard Volume:                       |              |           |
+| :: CO2(g)                              |   0.0000e+00 |    m3/mol |
+| :: CH4(g)                              |   0.0000e+00 |    m3/mol |
+| :: H2O(g)                              |   0.0000e+00 |    m3/mol |
+| :: O2(g)                               |   0.0000e+00 |    m3/mol |
+| :: H2(g)                               |   0.0000e+00 |    m3/mol |
+| Standard Gibbs Energy (formation):     |              |           |
+| :: CO2(g)                              | -132568.1837 |     J/mol |
+| :: CH4(g)                              | -250562.6135 |     J/mol |
+| :: H2O(g)                              |      18.8176 |     J/mol |
+| :: O2(g)                               |  450794.5594 |     J/mol |
+| :: H2(g)                               |    2202.9019 |     J/mol |
+| Standard Enthalpy (formation):         |              |           |
+| :: CO2(g)                              |   29576.4051 |     J/mol |
+| :: CH4(g)                              | -258559.1955 |     J/mol |
+| :: H2O(g)                              |   41077.5707 |     J/mol |
+| :: O2(g)                               |  563423.3786 |     J/mol |
+| :: H2(g)                               |  -11992.3063 |     J/mol |
+| Standard Entropy (formation):          |              |           |
+| :: CO2(g)                              |     434.5292 | J/(mol*K) |
+| :: CH4(g)                              |     -21.4299 | J/(mol*K) |
+| :: H2O(g)                              |     110.0328 | J/(mol*K) |
+| :: O2(g)                               |     301.8326 | J/(mol*K) |
+| :: H2(g)                               |     -38.0416 | J/(mol*K) |
+| Standard Internal Energy (formation):  |              |           |
+| :: CO2(g)                              |   29576.4051 |     J/mol |
+| :: CH4(g)                              | -258559.1955 |     J/mol |
+| :: H2O(g)                              |   41077.5707 |     J/mol |
+| :: O2(g)                               |  563423.3786 |     J/mol |
+| :: H2(g)                               |  -11992.3063 |     J/mol |
+| Standard Helmholtz Energy (formation): |              |           |
+| :: CO2(g)                              | -132568.1837 |     J/mol |
+| :: CH4(g)                              | -250562.6135 |     J/mol |
+| :: H2O(g)                              |      18.8176 |     J/mol |
+| :: O2(g)                               |  450794.5594 |     J/mol |
+| :: H2(g)                               |    2202.9019 |     J/mol |
+| Standard Heat Capacity (constant P):   |              |           |
+| :: CO2(g)                              |     443.1980 | J/(mol*K) |
+| :: CH4(g)                              |    -169.5362 | J/(mol*K) |
+| :: H2O(g)                              |     -38.5340 | J/(mol*K) |
+| :: O2(g)                               |    -167.9177 | J/(mol*K) |
+| :: H2(g)                               |    -113.5628 | J/(mol*K) |
+| Standard Heat Capacity (constant V):   |              |           |
+| :: CO2(g)                              |     443.1980 | J/(mol*K) |
+| :: CH4(g)                              |    -169.5362 | J/(mol*K) |
+| :: H2O(g)                              |     -38.5340 | J/(mol*K) |
+| :: O2(g)                               |    -167.9177 | J/(mol*K) |
+| :: H2(g)                               |    -113.5628 | J/(mol*K) |
++----------------------------------------+--------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="specifying-activity-models-for-pure-mineral-and-condensed-phases">
+<h2>Specifying activity models for pure mineral and condensed phases<a class="headerlink" href="#specifying-activity-models-for-pure-mineral-and-condensed-phases" title="Link to this heading">#</a></h2>
+<p>Pure minerals and condensed phases (substances in solid or liquid states) constitute phases with a single species. For these pure phases, there is no need to specify an activity model other than the ideal. For solid solution phases, check the next section.</p>
+</section>
+<section id="specifying-activity-models-for-solid-solution-phases">
+<h2>Specifying activity models for solid solution phases<a class="headerlink" href="#specifying-activity-models-for-solid-solution-phases" title="Link to this heading">#</a></h2>
+<p>Reaktoro supports currently only the following activity models for solid solutions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelRedlichKister</span></code></p></li>
+</ul>
+<p>The Redlich-Kister model assumes a solution with two solid species, and their activity coefficients, <span class="math notranslate nohighlight">\(\gamma_1\)</span> and <span class="math notranslate nohighlight">\(\gamma_2\)</span>, are calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_{1}=x_{2}^{2}[a_{0}+a_{1}(3x_{1}-x_{2})+a_{2}(x_{1}-x_{2})(5x_{1}-x_{2}),\]</div>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_{2}=x_{1}^{2}[a_{0}-a_{1}(3x_{2}-x_{1})+a_{2}(x_{2}-x_{1})(5x_{2}-x_{1}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_0\)</span>, <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span> are model parameters; <span class="math notranslate nohighlight">\(x_i\)</span> is the mole fraction of the species <span class="math notranslate nohighlight">\(i\)</span> in the solution.</p>
+<p>We show below how to create a chemical system with a single solid solution phase formed with minerals K-feldspar (KAlSi<sub>3</sub>O<sub>8</sub>) and albite (NaAlSi<sub>3</sub>O<sub>8</sub>) with assiged Redlich-Kister activity model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span>  <span class="c1"># the Redlich-Kister parameters (demonstration values!)</span>
+
+<span class="n">solidsolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SolidPhase</span><span class="p">(</span><span class="s2">&quot;K-feldspar Albite&quot;</span><span class="p">)</span>
+<span class="n">solidsolution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelRedlichKister</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">))</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solidsolution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code block creates a chemical state for this system with a single solid solution phase and prints its chemical properties.</p>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;K-feldspar&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Albite&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+
+<span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------------------------------------+------------+-----------+
+| Property                               |      Value |      Unit |
++----------------------------------------+------------+-----------+
+| Temperature                            |   298.1500 |         K |
+| Pressure                               |     1.0000 |       bar |
+| Volume                                 | 1.0473e-04 |        m3 |
+| Gibbs Energy                           | 19899.3040 |         J |
+| Enthalpy                               | 58945.9651 |         J |
+| Entropy                                |   130.9631 |       J/K |
+| Internal Energy                        | 58935.4921 |         J |
+| Helmholtz Energy                       | 19888.8310 |         J |
+| Charge                                 | 0.0000e+00 |       mol |
+| Element Amount:                        |            |           |
+| :: O                                   | 8.0000e+00 |       mol |
+| :: Na                                  | 5.0000e-01 |       mol |
+| :: Al                                  | 1.0000e+00 |       mol |
+| :: Si                                  | 3.0000e+00 |       mol |
+| :: K                                   | 5.0000e-01 |       mol |
+| Species Amount:                        |            |           |
+| :: K-feldspar :: KAlSi3O8              | 5.0000e-01 |       mol |
+| :: Albite :: NaAlSi3O8                 | 5.0000e-01 |       mol |
+| Mole Fraction:                         |            |           |
+| :: K-feldspar :: KAlSi3O8              | 5.0000e-01 |   mol/mol |
+| :: Albite :: NaAlSi3O8                 | 5.0000e-01 |   mol/mol |
+| Activity Coefficient:                  |            |           |
+| :: K-feldspar :: KAlSi3O8              |     2.1170 |         - |
+| :: Albite :: NaAlSi3O8                 |     0.7788 |         - |
+| Activity:                              |            |           |
+| :: K-feldspar :: KAlSi3O8              | 1.0585e+00 |         - |
+| :: Albite :: NaAlSi3O8                 | 3.8940e-01 |         - |
+| lg(Activity):                          |            |           |
+| :: K-feldspar :: KAlSi3O8              |     0.0247 |         - |
+| :: Albite :: NaAlSi3O8                 |    -0.4096 |         - |
+| ln(Activity):                          |            |           |
+| :: K-feldspar :: KAlSi3O8              |     0.0569 |         - |
+| :: Albite :: NaAlSi3O8                 |    -0.9431 |         - |
+| Chemical Potential:                    |            |           |
+| :: K-feldspar :: KAlSi3O8              | 1.2083e+04 |     J/mol |
+| :: Albite :: NaAlSi3O8                 | 2.4279e+04 |     J/mol |
+| Standard Volume:                       |            |           |
+| :: K-feldspar :: KAlSi3O8              | 1.0815e-04 |    m3/mol |
+| :: Albite :: NaAlSi3O8                 | 1.0131e-04 |    m3/mol |
+| Standard Gibbs Energy (formation):     |            |           |
+| :: K-feldspar :: KAlSi3O8              | 11941.9215 |     J/mol |
+| :: Albite :: NaAlSi3O8                 | 26617.2081 |     J/mol |
+| Standard Enthalpy (formation):         |            |           |
+| :: K-feldspar :: KAlSi3O8              | 48025.2203 |     J/mol |
+| :: Albite :: NaAlSi3O8                 | 68627.2314 |     J/mol |
+| Standard Entropy (formation):          |            |           |
+| :: K-feldspar :: KAlSi3O8              |   121.0240 | J/(mol*K) |
+| :: Albite :: NaAlSi3O8                 |   140.9023 | J/(mol*K) |
+| Standard Internal Energy (formation):  |            |           |
+| :: K-feldspar :: KAlSi3O8              | 48014.4053 |     J/mol |
+| :: Albite :: NaAlSi3O8                 | 68617.1004 |     J/mol |
+| Standard Helmholtz Energy (formation): |            |           |
+| :: K-feldspar :: KAlSi3O8              | 11931.1065 |     J/mol |
+| :: Albite :: NaAlSi3O8                 | 26607.0771 |     J/mol |
+| Standard Heat Capacity (constant P):   |            |           |
+| :: K-feldspar :: KAlSi3O8              |  -123.5945 | J/(mol*K) |
+| :: Albite :: NaAlSi3O8                 |  -123.5945 | J/(mol*K) |
+| Standard Heat Capacity (constant V):   |            |           |
+| :: K-feldspar :: KAlSi3O8              |  -123.5945 | J/(mol*K) |
+| :: Albite :: NaAlSi3O8                 |  -123.5945 | J/(mol*K) |
++----------------------------------------+------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="specifying-activity-models-for-ion-exchange-phases">
+<h2>Specifying activity models for ion exchange phases<a class="headerlink" href="#specifying-activity-models-for-ion-exchange-phases" title="Link to this heading">#</a></h2>
+<p>By default, ion exchange phases are created in Reaktoro with an ideal activity model assigned to it. This ideal model computes the activity of the <span class="math notranslate nohighlight">\(i\)</span>-th exchange species (e.g., NaX, KX, CaX<sub>2</sub>) according to:</p>
+<div class="math notranslate nohighlight">
+\[a_i = \dfrac{x_i z_{\mathrm{e},i}}{\sum_k x_k z_{\mathrm{e},k} } \]</div>
+<p>where <span class="math notranslate nohighlight">\(z_{\mathrm{e},i}\)</span> is the <em>exchanger’s equivalent</em> (e.g., 1 for NaX, 2 for CaX<sub>2</sub>) and <span class="math notranslate nohighlight">\(x_i\)</span> is the mole fraction of the exchange species.</p>
+<p>For non-ideal activity models for ion exchange phases, the following is currently available in Reaktoro:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ActivityModelIonExchangeGainesThomas</span></code></p></li>
+</ul>
+<p>The Gaines-Thomas model is implemented according to what is used PHREEQC <span id="id17">[<a class="reference internal" href="../bibliography.html#id849" title="D.L. Parkhurst and C.A.J. Appelo. Description of input and examples for PHREEQC version 3—A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations. In Groundwater Book 6, Modeling Techniques, chapter A43, pages 497. U.S. Geological Survey Techniques and Methods, 2013. URL: http://pubs.usgs.gov/tm/06/a43.">Parkhurst and Appelo, 2013</a>]</span>. We show below a demonstration in which a chemical system with aqueous and ion exchange phases are created followed by the computation of the system’s chemical properties at a given chemical state:</p>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">PhreeqcDatabase</span><span class="p">(</span><span class="s2">&quot;phreeqc.dat&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="s2">&quot;H2O Na+ Cl- H+ OH- K+ Ca+2 Mg+2&quot;</span><span class="p">)</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelPhreeqc</span><span class="p">(</span><span class="n">db</span><span class="p">))</span>  <span class="c1"># Ensure consistency with PHREEQC by using the same activity model PHREEQC would use with the phreeqc.dat database!</span>
+
+<span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">IonExchangePhase</span><span class="p">(</span><span class="s2">&quot;NaX KX CaX2 MgX2&quot;</span><span class="p">)</span>
+<span class="n">exchange</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelIonExchangeGainesThomas</span><span class="p">())</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">,</span> <span class="n">exchange</span><span class="p">)</span>
+
+<span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2O&quot;</span> <span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Na+&quot;</span> <span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;mmol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;K+&quot;</span>  <span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;mmol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Mg+2&quot;</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;mmol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Ca+2&quot;</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;mmol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;NaX&quot;</span> <span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="s2">&quot;umol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;KX&quot;</span> <span class="p">,</span>  <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;umol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;CaX2&quot;</span> <span class="p">,</span><span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;umol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;MgX2&quot;</span> <span class="p">,</span><span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;umol&quot;</span><span class="p">)</span>
+
+<span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------------------------------------+-------------+-----------+
+| Property                               |       Value |      Unit |
++----------------------------------------+-------------+-----------+
+| Temperature                            |    298.1500 |         K |
+| Pressure                               |      1.0000 |       bar |
+| Volume                                 |  1.0029e-03 |        m3 |
+| Gibbs Energy                           |     -0.0002 |         J |
+| Enthalpy                               |      0.0001 |         J |
+| Entropy                                |      0.0000 |       J/K |
+| Internal Energy                        |   -100.2933 |         J |
+| Helmholtz Energy                       |   -100.2935 |         J |
+| Charge                                 |  6.0000e-03 |       mol |
+| Element Amount:                        |             |           |
+| :: X                                   |  1.2000e-07 |       mol |
+| :: H                                   |  1.1101e+02 |       mol |
+| :: O                                   |  5.5506e+01 |       mol |
+| :: Na                                  |  1.0001e-03 |       mol |
+| :: Mg                                  |  1.0000e-03 |       mol |
+| :: Cl                                  |  1.0000e-16 |       mol |
+| :: K                                   |  1.0000e-03 |       mol |
+| :: Ca                                  |  1.0000e-03 |       mol |
+| Species Amount:                        |             |           |
+| :: H2O                                 |  5.5506e+01 |       mol |
+| :: Na+                                 |  1.0000e-03 |       mol |
+| :: Cl-                                 |  1.0000e-16 |       mol |
+| :: H+                                  |  1.0000e-16 |       mol |
+| :: OH-                                 |  1.0000e-16 |       mol |
+| :: K+                                  |  1.0000e-03 |       mol |
+| :: Ca+2                                |  1.0000e-03 |       mol |
+| :: Mg+2                                |  1.0000e-03 |       mol |
+| :: NaX                                 |  6.0000e-08 |       mol |
+| :: KX                                  |  2.0000e-08 |       mol |
+| :: CaX2                                |  1.0000e-08 |       mol |
+| :: MgX2                                |  1.0000e-08 |       mol |
+| Mole Fraction:                         |             |           |
+| :: H2O                                 |  9.9993e-01 |   mol/mol |
+| :: Na+                                 |  1.8015e-05 |   mol/mol |
+| :: Cl-                                 |  1.8015e-18 |   mol/mol |
+| :: H+                                  |  1.8015e-18 |   mol/mol |
+| :: OH-                                 |  1.8015e-18 |   mol/mol |
+| :: K+                                  |  1.8015e-05 |   mol/mol |
+| :: Ca+2                                |  1.8015e-05 |   mol/mol |
+| :: Mg+2                                |  1.8015e-05 |   mol/mol |
+| :: NaX                                 |  6.0000e-01 |   mol/mol |
+| :: KX                                  |  2.0000e-01 |   mol/mol |
+| :: CaX2                                |  1.0000e-01 |   mol/mol |
+| :: MgX2                                |  1.0000e-01 |   mol/mol |
+| Activity Coefficient:                  |             |           |
+| :: H2O                                 |      1.0000 |         - |
+| :: Na+                                 |      0.9278 |         - |
+| :: Cl-                                 |      0.9265 |         - |
+| :: H+                                  |      0.9336 |         - |
+| :: OH-                                 |      0.9261 |         - |
+| :: K+                                  |      0.9262 |         - |
+| :: Ca+2                                |      0.7440 |         - |
+| :: Mg+2                                |      0.7466 |         - |
+| :: NaX                                 |      0.9276 |         - |
+| :: KX                                  |      0.9261 |         - |
+| :: CaX2                                |      0.7434 |         - |
+| :: MgX2                                |      0.7460 |         - |
+| Activity:                              |             |           |
+| :: H2O                                 |  9.9993e-01 |         - |
+| :: Na+                                 |  9.2783e-04 |         - |
+| :: Cl-                                 |  9.2646e-17 |         - |
+| :: H+                                  |  9.3362e-17 |         - |
+| :: OH-                                 |  9.2608e-17 |         - |
+| :: K+                                  |  9.2624e-04 |         - |
+| :: Ca+2                                |  7.4401e-04 |         - |
+| :: Mg+2                                |  7.4659e-04 |         - |
+| :: NaX                                 |  4.6382e-01 |         - |
+| :: KX                                  |  1.5434e-01 |         - |
+| :: CaX2                                |  1.2391e-01 |         - |
+| :: MgX2                                |  1.2434e-01 |         - |
+| lg(Activity):                          |             |           |
+| :: H2O                                 |     -0.0000 |         - |
+| :: Na+                                 |     -3.0325 |         - |
+| :: Cl-                                 |    -16.0332 |         - |
+| :: H+                                  |    -16.0298 |         - |
+| :: OH-                                 |    -16.0334 |         - |
+| :: K+                                  |     -3.0333 |         - |
+| :: Ca+2                                |     -3.1284 |         - |
+| :: Mg+2                                |     -3.1269 |         - |
+| :: NaX                                 |     -0.3336 |         - |
+| :: KX                                  |     -0.8115 |         - |
+| :: CaX2                                |     -0.9069 |         - |
+| :: MgX2                                |     -0.9054 |         - |
+| ln(Activity):                          |             |           |
+| :: H2O                                 |     -0.0001 |         - |
+| :: Na+                                 |     -6.9827 |         - |
+| :: Cl-                                 |    -36.9177 |         - |
+| :: H+                                  |    -36.9100 |         - |
+| :: OH-                                 |    -36.9182 |         - |
+| :: K+                                  |     -6.9844 |         - |
+| :: Ca+2                                |     -7.2035 |         - |
+| :: Mg+2                                |     -7.2000 |         - |
+| :: NaX                                 |     -0.7683 |         - |
+| :: KX                                  |     -1.8686 |         - |
+| :: CaX2                                |     -2.0882 |         - |
+| :: MgX2                                |     -2.0847 |         - |
+| Chemical Potential:                    |             |           |
+| :: H2O                                 | -1.6857e-01 |     J/mol |
+| :: Na+                                 | -1.7310e+04 |     J/mol |
+| :: Cl-                                 | -9.1518e+04 |     J/mol |
+| :: H+                                  | -9.1498e+04 |     J/mol |
+| :: OH-                                 | -1.1636e+04 |     J/mol |
+| :: K+                                  | -1.7314e+04 |     J/mol |
+| :: Ca+2                                | -1.7857e+04 |     J/mol |
+| :: Mg+2                                | -1.7848e+04 |     J/mol |
+| :: NaX                                 | -1.9045e+03 |     J/mol |
+| :: KX                                  | -8.6277e+03 |     J/mol |
+| :: CaX2                                | -9.7430e+03 |     J/mol |
+| :: MgX2                                | -8.5928e+03 |     J/mol |
+| Standard Volume:                       |             |           |
+| :: H2O                                 |  1.8069e-05 |    m3/mol |
+| :: Na+                                 | -1.5225e-06 |    m3/mol |
+| :: Cl-                                 |  1.8045e-05 |    m3/mol |
+| :: H+                                  |  0.0000e+00 |    m3/mol |
+| :: OH-                                 | -4.1384e-06 |    m3/mol |
+| :: K+                                  |  8.9794e-06 |    m3/mol |
+| :: Ca+2                                | -1.8255e-05 |    m3/mol |
+| :: Mg+2                                | -2.1937e-05 |    m3/mol |
+| :: NaX                                 |  0.0000e+00 |    m3/mol |
+| :: KX                                  |  0.0000e+00 |    m3/mol |
+| :: CaX2                                |  0.0000e+00 |    m3/mol |
+| :: MgX2                                |  0.0000e+00 |    m3/mol |
+| Standard Gibbs Energy (formation):     |             |           |
+| :: H2O                                 |      0.0000 |     J/mol |
+| :: Na+                                 |      0.0000 |     J/mol |
+| :: Cl-                                 |      0.0000 |     J/mol |
+| :: H+                                  |      0.0000 |     J/mol |
+| :: OH-                                 |  79882.1992 |     J/mol |
+| :: K+                                  |      0.0000 |     J/mol |
+| :: Ca+2                                |      0.0000 |     J/mol |
+| :: Mg+2                                |      0.0000 |     J/mol |
+| :: NaX                                 |     -0.0020 |     J/mol |
+| :: KX                                  |  -3995.5945 |     J/mol |
+| :: CaX2                                |  -4566.4315 |     J/mol |
+| :: MgX2                                |  -3424.8346 |     J/mol |
+| Standard Enthalpy (formation):         |             |           |
+| :: H2O                                 |      0.0000 |     J/mol |
+| :: Na+                                 |      0.0000 |     J/mol |
+| :: Cl-                                 |      0.0000 |     J/mol |
+| :: H+                                  |      0.0000 |     J/mol |
+| :: OH-                                 |  56358.9533 |     J/mol |
+| :: K+                                  |      0.0000 |     J/mol |
+| :: Ca+2                                |      0.0000 |     J/mol |
+| :: Mg+2                                |      0.0000 |     J/mol |
+| :: NaX                                 |     -0.0020 |     J/mol |
+| :: KX                                  |  -4299.9881 |     J/mol |
+| :: CaX2                                |   7199.9758 |     J/mol |
+| :: MgX2                                |   7399.9709 |     J/mol |
+| Standard Entropy (formation):          |             |           |
+| :: H2O                                 |      0.0000 | J/(mol*K) |
+| :: Na+                                 |      0.0000 | J/(mol*K) |
+| :: Cl-                                 |      0.0000 | J/(mol*K) |
+| :: H+                                  |      0.0000 | J/(mol*K) |
+| :: OH-                                 |    -78.8974 | J/(mol*K) |
+| :: K+                                  |      0.0000 | J/(mol*K) |
+| :: Ca+2                                |      0.0000 | J/(mol*K) |
+| :: Mg+2                                |      0.0000 | J/(mol*K) |
+| :: NaX                                 |      0.0000 | J/(mol*K) |
+| :: KX                                  |     -1.0209 | J/(mol*K) |
+| :: CaX2                                |     39.4647 | J/(mol*K) |
+| :: MgX2                                |     36.3066 | J/(mol*K) |
+| Standard Internal Energy (formation):  |             |           |
+| :: H2O                                 |     -1.8069 |     J/mol |
+| :: Na+                                 |      0.1522 |     J/mol |
+| :: Cl-                                 |     -1.8045 |     J/mol |
+| :: H+                                  |      0.0000 |     J/mol |
+| :: OH-                                 |  56359.3671 |     J/mol |
+| :: K+                                  |     -0.8979 |     J/mol |
+| :: Ca+2                                |      1.8255 |     J/mol |
+| :: Mg+2                                |      2.1937 |     J/mol |
+| :: NaX                                 |     -0.0020 |     J/mol |
+| :: KX                                  |  -4299.9881 |     J/mol |
+| :: CaX2                                |   7199.9758 |     J/mol |
+| :: MgX2                                |   7399.9709 |     J/mol |
+| Standard Helmholtz Energy (formation): |             |           |
+| :: H2O                                 |     -1.8069 |     J/mol |
+| :: Na+                                 |      0.1522 |     J/mol |
+| :: Cl-                                 |     -1.8045 |     J/mol |
+| :: H+                                  |      0.0000 |     J/mol |
+| :: OH-                                 |  79882.6131 |     J/mol |
+| :: K+                                  |     -0.8979 |     J/mol |
+| :: Ca+2                                |      1.8255 |     J/mol |
+| :: Mg+2                                |      2.1937 |     J/mol |
+| :: NaX                                 |     -0.0020 |     J/mol |
+| :: KX                                  |  -3995.5945 |     J/mol |
+| :: CaX2                                |  -4566.4315 |     J/mol |
+| :: MgX2                                |  -3424.8346 |     J/mol |
+| Standard Heat Capacity (constant P):   |             |           |
+| :: H2O                                 |      0.0000 | J/(mol*K) |
+| :: Na+                                 |      0.0000 | J/(mol*K) |
+| :: Cl-                                 |      0.0000 | J/(mol*K) |
+| :: H+                                  |      0.0000 | J/(mol*K) |
+| :: OH-                                 |   -189.6441 | J/(mol*K) |
+| :: K+                                  |      0.0000 | J/(mol*K) |
+| :: Ca+2                                |      0.0000 | J/(mol*K) |
+| :: Mg+2                                |      0.0000 | J/(mol*K) |
+| :: NaX                                 |      0.0000 | J/(mol*K) |
+| :: KX                                  |      0.0000 | J/(mol*K) |
+| :: CaX2                                |      0.0000 | J/(mol*K) |
+| :: MgX2                                |      0.0000 | J/(mol*K) |
+| Standard Heat Capacity (constant V):   |             |           |
+| :: H2O                                 |      0.0000 | J/(mol*K) |
+| :: Na+                                 |      0.0000 | J/(mol*K) |
+| :: Cl-                                 |      0.0000 | J/(mol*K) |
+| :: H+                                  |      0.0000 | J/(mol*K) |
+| :: OH-                                 |   -189.6441 | J/(mol*K) |
+| :: K+                                  |      0.0000 | J/(mol*K) |
+| :: Ca+2                                |      0.0000 | J/(mol*K) |
+| :: Mg+2                                |      0.0000 | J/(mol*K) |
+| :: NaX                                 |      0.0000 | J/(mol*K) |
+| :: KX                                  |      0.0000 | J/(mol*K) |
+| :: CaX2                                |      0.0000 | J/(mol*K) |
+| :: MgX2                                |      0.0000 | J/(mol*K) |
++----------------------------------------+-------------+-----------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>This guide demonstrated how you can create chemical systems with activity models of your choice assigned to the phases. Reaktoro is constantly under development and new activity models will be available over time. If you would like to help with the development of a specific activity model, <a class="reference external" href="mailto:allan&#46;leal&#37;&#52;&#48;erdw&#46;ethz&#46;ch">please get in touch</a>.</p>
+<div class="admonition-attention admonition">
+<p class="admonition-title">Attention</p>
+<p>Ensure you have correctly selected and attached an activity model to a phase when comparing Reaktoro’s computations with other codes. When benchmarking, it is important to choose similar models. Ideally, you want to select the same one and use identical parameters for the model.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="computing-thermo-props-of-reactions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Computing standard thermodynamic properties of reactions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="defining-materials.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Defining materials</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-aqueous-phases">Specifying activity models for aqueous phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-gaseous-and-liquid-phases">Specifying activity models for gaseous and liquid phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-pure-mineral-and-condensed-phases">Specifying activity models for pure mineral and condensed phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-solid-solution-phases">Specifying activity models for solid solution phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-activity-models-for-ion-exchange-phases">Specifying activity models for ion exchange phases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

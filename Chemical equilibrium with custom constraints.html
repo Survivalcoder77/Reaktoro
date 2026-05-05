@@ -1,0 +1,895 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chemical equilibrium with custom constraints</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/customized_mystnb.css?v=0eb7c136" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/equilibrium/equilibrium-with-custom-constraints';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/customize.js?v=7a8fad8a"></script>
+    <link rel="canonical" href="https://reaktoro.org/tutorials/equilibrium/equilibrium-with-custom-constraints.html" />
+    <link rel="icon" href="../../_static/reaktoro-logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chemical equilibrium with given element and charge amounts" href="equilibrium-with-given-component-amounts.html" />
+    <link rel="prev" title="Chemical equilibrium with fixed volume and internal energy" href="equilibrium-with-fixed-volume-internal-energy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/reaktoro-for-python-and-cpp.svg" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../_static/reaktoro-for-python-and-cpp-dark-mode.svg" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/index.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-conda.html">Installation using Conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-using-cmake.html">Installation using CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation-in-google-colab.html">Installation in Google Colab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/api">API Reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://reaktoro.org/v1">Reaktoro v1</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/importing-reaktoro.html">Importing Reaktoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/loading-databases.html">Loading thermodynamic databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/inspecting-databases.html">Inspecting thermodynamic databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/defining-chemical-systems.html">Defining chemical systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/creating-chemical-states.html">Creating chemical states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/computing-chemical-properties.html">Computing chemical properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/computing-aqueous-properties.html">Computing aqueous properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/computing-thermo-props-of-species.html">Computing standard thermodynamic properties of species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/computing-thermo-props-of-reactions.html">Computing standard thermodynamic properties of reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/specifying-activity-models.html">Specifying activity models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/defining-materials.html">Defining materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chemical Equilibrium</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-basics.html">Chemical equilibrium: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-specifying-constraints.html">Chemical equilibrium with constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-fixed-ph.html">Chemical equilibrium with fixed pH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-fixed-ph-charge-balance.html">Chemical equilibrium with fixed pH and charge balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-fixed-phase-amount.html">Chemical equilibrium with fixed phase amount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-fixed-fugacity.html">Chemical equilibrium with fixed fugacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-fixed-volume-internal-energy.html">Chemical equilibrium with fixed volume and internal energy</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Chemical equilibrium with custom constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium-with-given-component-amounts.html">Chemical equilibrium with given element and charge amounts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-basics.html">Chemical kinetics: the basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/kinetics-minerals-using-palandri-kharaka-model.html">Chemical kinetics for mineral reactions using Palandri-Kharaka model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced/index.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/creating-custom-databases.html">Creating thermodynamic databases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/solubility/index.html">Solubility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-calcite-on-acidity-and-temperature.html">Calcite solubility in water, rainwater, and seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/solubility/solubility-co2-on-salinity-and-temperature.html">Carbon-dioxide solubility in brines with different salinity and temperature</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geochemistry/index.html">Geochemistry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-co2-addition-in-seawater.html">Carbon dioxide (CO₂) dissolution in seawater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-contaminants-in-water.html">pH-dependence on added contaminants in water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/evian-water-analysis.html">Analysis of the Evian water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/opening-bottle-with-sparkling-water.html">Opening bottle with sparkling water</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/uraniun-speciation-vs-pH.html">Uranium (VI) speciation as a function of pH at fixed CO<sub>2</sub> partial pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/cement-simulation-with-solid-solutions.html">The effect of limestone addition on a hydrated cement mix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-dune-sand.html">Ion exchange in dune sand and groundwater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-mix-porewater-extractant.html">Extraction of exchangeable cations in dune sand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-cax2-nax-kx-vs-changing-ca-k.html">Cation exchange competition among Na<sup>+</sup>, K<sup>+</sup> and Ca<sup>2+</sup></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geochemistry/ion-exchange-calcite-cax-vs-ph.html">Effect of calcite dissolution on exchangeable cations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/geobiology/index.html">Geobiology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-streammodel-fixed-fugacity.html">Carbonate-rich lakes modeling on the early Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/geobiology/geobiology-phreeqc-fixed-fugacity.html">Phosphate accumulation in carbonate-rich brines</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/biomass-gasification/index.html">Biomass Gasification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/biomass-gasification/biomass-gasification.html">Biomass Gasification</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../general/citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general/license.html">License</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/equilibrium/equilibrium-with-custom-constraints.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chemical equilibrium with custom constraints</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-volume-and-internal-energy-constraints">Creating your own volume and internal energy constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-ph-constraint">Creating your own pH constraint</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chemical-equilibrium-with-custom-constraints">
+<h1>Chemical equilibrium with custom constraints<a class="headerlink" href="#chemical-equilibrium-with-custom-constraints" title="Link to this heading">#</a></h1>
+<p>Reaktoro already implements many different types of chemical equilibrium constraints. The <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a> class allows you to constrain the following properties in an equilibrium state:</p>
+<ul class="simple">
+<li><p>the temperature of the system</p></li>
+<li><p>the pressure of the system</p></li>
+<li><p>the volume of the system</p></li>
+<li><p>the internal energy of the system</p></li>
+<li><p>the enthalpy of the system</p></li>
+<li><p>the Gibbs energy of the system</p></li>
+<li><p>the Helmholtz energy of the system</p></li>
+<li><p>the entropy of the system</p></li>
+<li><p>the electric charge of the system</p></li>
+<li><p>the amount of an element in the system</p></li>
+<li><p>the amount of an element in a phase</p></li>
+<li><p>the mass of an element in the system</p></li>
+<li><p>the mass of an element in a phase</p></li>
+<li><p>the amount of a phase</p></li>
+<li><p>the mass of a phase</p></li>
+<li><p>the volume of a phase</p></li>
+<li><p>the electric charge of a phase</p></li>
+<li><p>the chemical potential of a species</p></li>
+<li><p>the activity of a species</p></li>
+<li><p>the fugacity of a gas</p></li>
+<li><p>the pH of an aqueous phase</p></li>
+<li><p>the pMg of an aqueous phase</p></li>
+<li><p>the pE of an aqueous phase</p></li>
+<li><p>the Eh of an aqueous phase</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This list of properties that can be constrained may be more extensive now! For a more up-to-date list, check the API of class <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a>.</p>
+</div>
+<p>These options may not suffice to you. This tutorial will demonstrate how <strong>your own constraints</strong> can be defined and used by the <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSolver.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSolver</span></code></a> class to honor the conditions you want to see attained at an equilibrium state.</p>
+<p>Before we proceed, we need to understand how equilibrium constraints are formulated in Reaktoro and used by its equilibrium solver. Let’s consider you want to impose a value for the enthalpy of the system, <span class="math notranslate nohighlight">\(H_{\mathrm{desired}}\)</span>. A chemical state that honors all imposed equilibrium constraints and mass/charge conservation conditions is sought during the chemical equilibrium calculation. This happens iteratively, and in a given iteration of the algorithm, the enthalpy of the system, <span class="math notranslate nohighlight">\(H_{\mathrm{current}}\)</span>, may still be different than that you want, <span class="math notranslate nohighlight">\(H_{\mathrm{desired}}\)</span>. At some point, the algorithm will converge to a chemical state in which the <em>equilibrium constraint residual</em> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[|H_{\mathrm{current}}-H_{\mathrm{desired}}|&lt;\epsilon_{\mathrm{tolerance}},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_{\mathrm{tolerance}}\)</span> is a small positive tolerance value (e.g., 10<sup>-6</sup>).</p>
+<p>We will learn in the next sections that equilibrium constraints in Reaktoro can be defined by writing <strong>residual expressions</strong> like the one above.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Reaktoro is not restricted to impose only the value of a property at equilibrium, such as shown in the previous example in which enthalpy is constrained. Because equilibrium constraints are formulated in terms of <em>residual expressions</em>, you can write whatever you want there, even expressions involving multiple properties!</p>
+</div>
+<section id="creating-your-own-volume-and-internal-energy-constraints">
+<h2>Creating your own volume and internal energy constraints<a class="headerlink" href="#creating-your-own-volume-and-internal-energy-constraints" title="Link to this heading">#</a></h2>
+<p>In a <a class="reference internal" href="equilibrium-with-fixed-volume-internal-energy.html"><span class="doc std std-doc">previous example</span></a>, we modeled the combustion of CH<sub>4</sub> in a rigid and adiabatic chamber. We’ll repeat this example here. However, this time, <strong>we’ll define the volume and internal energy constraints from scratch</strong>. This example should be helpful for you to understand the fundamentals of defining functional constraints and attaching them to the equilibrium solver.</p>
+<p>So, let’s start as usual with the definition of our chemical system and the creation of an initial chemical state for it (this will be identical to what we did <a class="reference internal" href="equilibrium-with-fixed-volume-internal-energy.html"><span class="doc std std-doc">here</span></a>!).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reaktoro</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">NasaDatabase</span><span class="p">(</span><span class="s2">&quot;nasa-cea&quot;</span><span class="p">)</span>
+
+<span class="n">gases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GaseousPhase</span><span class="p">(</span><span class="s2">&quot;CH4 O2 CO2 CO H2O H2&quot;</span><span class="p">)</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">gases</span><span class="p">)</span>
+
+<span class="n">state0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state0</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mf">25.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">state0</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">state0</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;CH4&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state0</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;O2&quot;</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state0</span><span class="p">.</span><span class="nf">scaleVolume</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;cm3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s calculate the chemical properties of this system in this initial state and save the initial volume and internal energy in the variables <code class="docutils literal notranslate"><span class="pre">V0</span></code> and <code class="docutils literal notranslate"><span class="pre">U0</span></code> for later use:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">props0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalProps</span><span class="p">(</span><span class="n">state0</span><span class="p">)</span>
+
+<span class="n">V0</span> <span class="o">=</span> <span class="n">props0</span><span class="p">.</span><span class="nf">volume</span><span class="p">()</span>
+<span class="n">U0</span> <span class="o">=</span> <span class="n">props0</span><span class="p">.</span><span class="nf">internalEnergy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now finally define our own constraints (from scratch!). Below is the complete sequence of steps with just a few comments. More details will be given later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">specs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumSpecs</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+
+<span class="n">idxV</span> <span class="o">=</span> <span class="n">specs</span><span class="p">.</span><span class="nf">addInput</span><span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">)</span>  <span class="c1"># add &quot;V&quot; as the symbol for a new input condition to the equilibrium problem</span>
+<span class="n">idxU</span> <span class="o">=</span> <span class="n">specs</span><span class="p">.</span><span class="nf">addInput</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>  <span class="c1"># add &quot;U&quot; as the symbol for a new input condition to the equilibrium problem</span>
+
+<span class="n">volumeConstraint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquationConstraint</span><span class="p">()</span>
+<span class="n">volumeConstraint</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;VolumeConstraint&quot;</span>  <span class="c1"># give some identification name to the constraint (it&#39;s up to you how you call this)</span>
+<span class="n">volumeConstraint</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">props</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="n">props</span><span class="p">.</span><span class="nf">volume</span><span class="p">()</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="n">idxV</span><span class="p">]</span>  <span class="c1"># the residual function defining V(current) - V(desired)</span>
+
+<span class="n">internalEnergyConstraint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquationConstraint</span><span class="p">()</span>
+<span class="n">internalEnergyConstraint</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;InternalEnergyConstraint&quot;</span>  <span class="c1"># give some identification name to the constraint (it&#39;s up to you how you call this)</span>
+<span class="n">internalEnergyConstraint</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">props</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="n">props</span><span class="p">.</span><span class="nf">internalEnergy</span><span class="p">()</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="n">idxU</span><span class="p">]</span>  <span class="c1"># the residual function defining U(current) - U(desired)</span>
+
+<span class="n">specs</span><span class="p">.</span><span class="nf">addConstraint</span><span class="p">(</span><span class="n">volumeConstraint</span><span class="p">)</span>
+<span class="n">specs</span><span class="p">.</span><span class="nf">addConstraint</span><span class="p">(</span><span class="n">internalEnergyConstraint</span><span class="p">)</span>
+
+<span class="n">solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumSolver</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As usual, we start with the creation of an <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a> object. Besides the code comments above, it’s worth commenting further that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">idxV</span></code> and <code class="docutils literal notranslate"><span class="pre">idxU</span></code> are the indices of the newly added inputs to the equilibrium problem (namely <code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">props,</span> <span class="pre">w:</span> <span class="pre">props.volume()</span> <span class="pre">-</span> <span class="pre">w[idxV]</span></code> is a <a class="reference external" href="https://www.w3schools.com/python/python_lambda.asp">lambda function</a> defining our <em>residual expression for the volume constraint</em>: <span class="math notranslate nohighlight">\(V_\mathrm{current} - V_\mathrm{desired}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">props,</span> <span class="pre">w:</span> <span class="pre">props.internalEnergy()</span> <span class="pre">-</span> <span class="pre">w[idxV]</span></code> is a lambda function defining our <em>residual expression for the internal energy constraint</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">props</span></code> is the <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1ChemicalProps.html"><code class="docutils literal notranslate"><span class="pre">ChemicalProps</span></code></a> object containing the current chemical properties of the system from where we get <em>current volume and internal energy</em>: <span class="math notranslate nohighlight">\(U_\mathrm{current} - U_\mathrm{desired}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code> is the array with the values of the inputs introduced in the equilibrium problem from where we get the <em>desired volume and internal energy</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w[idxV]</span></code> and <code class="docutils literal notranslate"><span class="pre">w[idxU]</span></code> are the values of introduced inputs <code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code> (the desired values of volume and internal energy)</p></li>
+</ul>
+<p>It’s now time to create our <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumConditions.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumConditions</span></code></a> object, where specify the values for the inputs <code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumConditions</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="n">V0</span><span class="p">)</span>  <span class="c1"># remember the symbol &quot;V&quot; introduced before? you&#39;re using it here!</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="n">U0</span><span class="p">)</span>  <span class="c1"># remember the symbol &quot;U&quot; introduced before? you&#39;re using it here!</span>
+
+<span class="n">conditions</span><span class="p">.</span><span class="nf">setLowerBoundTemperature</span><span class="p">(</span><span class="mf">25.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">setUpperBoundTemperature</span><span class="p">(</span><span class="mf">2000.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+
+<span class="n">conditions</span><span class="p">.</span><span class="nf">setLowerBoundPressure</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">setUpperBoundPressure</span><span class="p">(</span><span class="mf">1000.0</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After this, we are ready to solve the chemical equilibrium problem that models the combustion of CH<sub>4</sub> in a rigid and adiabatic chamber:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">state0</span><span class="p">)</span>  <span class="c1"># let&#39;s create a copy of the initial state</span>
+
+<span class="n">solver</span><span class="p">.</span><span class="nf">solve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">conditions</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL STATE&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FINAL STATE
++-----------------+------------+------+
+| Property        |      Value | Unit |
++-----------------+------------+------+
+| Temperature     |  1080.3867 |    K |
+| Pressure        |     5.8362 |  bar |
+| Charge:         | 0.0000e+00 |  mol |
+| Element Amount: |            |      |
+| :: H            | 1.2102e-03 |  mol |
+| :: C            | 3.0255e-04 |  mol |
+| :: O            | 2.0170e-04 |  mol |
+| Species Amount: |            |      |
+| :: CH4          | 1.2897e-04 |  mol |
+| :: O2           | 1.0000e-16 |  mol |
+| :: CO2          | 9.6874e-06 |  mol |
+| :: CO           | 1.6389e-04 |  mol |
+| :: H2O          | 1.8430e-05 |  mol |
+| :: H2           | 3.2873e-04 |  mol |
++-----------------+------------+------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it! You may want to check if this computed equilibrium state is identical to that found in this <a class="reference internal" href="equilibrium-with-fixed-volume-internal-energy.html"><span class="doc std std-doc">tutorial</span></a>, where we used predefined volume and internal energy constraints to solve the same problem.</p>
+</section>
+<section id="creating-your-own-ph-constraint">
+<h2>Creating your own pH constraint<a class="headerlink" href="#creating-your-own-ph-constraint" title="Link to this heading">#</a></h2>
+<p>We’ve seen in this <a class="reference internal" href="equilibrium-with-fixed-ph.html"><span class="doc std std-doc">previous tutorial</span></a> how to use the predefined equilibrium constraint for pH in class <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a>. We also saw that using that pH constraint causes the system to be open to H<sup>+</sup>. However, what if we want to fix the pH of an aqueous solution by <em>titrating it with another substance</em>?</p>
+<p>We consider thus the following case. At 30 °C and 5 atm, how much CO<sub>2</sub> must be titrated into an aqueous solution saturated with mineral calcite (CaCO<sub>3</sub>) to obtain pH 7? This problem can be solved by formulating a chemical equilibrium calculation in which <strong>temperature</strong>, <strong>pressure</strong>, and <strong>pH</strong> are constrained and that <strong>the system is open to the mass transfer of CO<sub>2</sub></strong>.</p>
+<p>To solve this problem, we start with the definition of a chemical system with the following phases:</p>
+<ul class="simple">
+<li><p>an aqueous phase (with aqueous species that can be formed from elements H, O, Na, Cl, C, and Ca);</p></li>
+<li><p>a gaseous phase (with only CO<sub>2</sub>(g) and H<sub>2</sub>O(g) species)</p></li>
+<li><p>a solid phase (representing the mineral calcite)</p></li>
+</ul>
+<p>We also set some activity models for the aqueous and gaseous phases (check this <a class="reference internal" href="../basics/specifying-activity-models.html"><span class="doc std std-doc">tutorial</span></a> for more information about specifying activity models):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reaktoro</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">PhreeqcDatabase</span><span class="p">(</span><span class="s2">&quot;phreeqc.dat&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousPhase</span><span class="p">(</span><span class="nf">speciate</span><span class="p">(</span><span class="s2">&quot;H O Na Cl C Ca&quot;</span><span class="p">))</span>
+<span class="n">solution</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelPhreeqc</span><span class="p">(</span><span class="n">db</span><span class="p">))</span>
+
+<span class="n">gases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">GaseousPhase</span><span class="p">(</span><span class="s2">&quot;CO2(g) H2O(g)&quot;</span><span class="p">)</span>
+<span class="n">gases</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ActivityModelPengRobinsonPhreeqcOriginal</span><span class="p">())</span>
+
+<span class="n">calcite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MineralPhase</span><span class="p">(</span><span class="s2">&quot;Calcite&quot;</span><span class="p">)</span>
+
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalSystem</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">solution</span><span class="p">,</span> <span class="n">gases</span><span class="p">,</span> <span class="n">calcite</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now define a helper function that computes pH for given chemical properties of a system:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pH</span><span class="p">(</span><span class="n">props</span><span class="p">:</span> <span class="n">ChemicalProps</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">props</span><span class="p">.</span><span class="nf">speciesActivityLg</span><span class="p">(</span><span class="s2">&quot;H+&quot;</span><span class="p">)</span>  <span class="c1"># this results in -log10(a[H+]), which is pH</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use this convenience function next (in the <em>lambda function defining the residual expression</em>), while creating our <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a> object in which we provide the specifications for the equilibrium problem we want to formulate.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The method call <code class="docutils literal notranslate"><span class="pre">props.speciesActivityLg(&quot;H+&quot;)</span></code> will be performed several times. If you would like to avoid an index search for <code class="docutils literal notranslate"><span class="pre">H+</span></code> in every such call, you could do the following instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idxH</span> <span class="o">=</span> <span class="n">system</span><span class="p">.</span><span class="nf">species</span><span class="p">()</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="s2">&quot;H+&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pH</span><span class="p">(</span><span class="n">props</span><span class="p">:</span> <span class="n">ChemicalProps</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">props</span><span class="p">.</span><span class="nf">speciesActivityLg</span><span class="p">(</span><span class="n">idxH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We want to perform a chemical equilibrium calculation in which the following properties are constrained:</p>
+<ul class="simple">
+<li><p>temperature;</p></li>
+<li><p>pressure; and</p></li>
+<li><p>pH.</p></li>
+</ul>
+<p>Moreover, our system is open to CO<sub>2</sub>. These specifications are all provided next in the <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a> object we create:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">specs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumSpecs</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+
+<span class="n">specs</span><span class="p">.</span><span class="nf">addInput</span><span class="p">(</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>  <span class="c1"># add &quot;pH&quot; as the symbol for a new input condition to the equilibrium problem</span>
+
+<span class="n">pHConstraint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquationConstraint</span><span class="p">()</span>
+<span class="n">pHConstraint</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;pHConstraint&quot;</span>  <span class="c1"># give some identification name to the constraint (it&#39;s up to you how you call this)</span>
+<span class="n">pHConstraint</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">props</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="nf">pH</span><span class="p">(</span><span class="n">props</span><span class="p">)</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the residual function defining pH(current) - pH(desired)</span>
+
+<span class="n">specs</span><span class="p">.</span><span class="nf">temperature</span><span class="p">()</span>
+<span class="n">specs</span><span class="p">.</span><span class="nf">pressure</span><span class="p">()</span>
+<span class="n">specs</span><span class="p">.</span><span class="nf">addConstraint</span><span class="p">(</span><span class="n">pHConstraint</span><span class="p">)</span>
+<span class="n">specs</span><span class="p">.</span><span class="nf">openTo</span><span class="p">(</span><span class="s2">&quot;CO2&quot;</span><span class="p">)</span>
+
+<span class="n">solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumSolver</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll now create an <em>initial chemical state</em> for the system representing a 1 molal NaCl aqueous solution mixed with a sufficient amount of calcite to saturate the fluid at 25 °C and 1 atm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ChemicalState</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mf">25.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;atm&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Na+&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Cl-&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
+<span class="n">state</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;Calcite&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>  <span class="c1"># plenty of Calcite to ensure saturation levels!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we set the conditions of this system at the chemical equilibrium state of interest (using <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumConditions.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumConditions</span></code></a>) and then use <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSolver.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSolver</span></code></a> to compute this state of equilibrium:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumConditions</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">temperature</span><span class="p">(</span><span class="mf">30.0</span><span class="p">,</span> <span class="s2">&quot;celsius&quot;</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">pressure</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;atm&quot;</span><span class="p">)</span>
+<span class="n">conditions</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)</span>  <span class="c1"># remember the symbol &quot;pH&quot; introduced before? you&#39;re using it here!</span>
+
+<span class="n">solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EquilibriumSolver</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
+<span class="n">solver</span><span class="p">.</span><span class="nf">solve</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">conditions</span><span class="p">)</span>
+
+<span class="n">aprops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AqueousProps</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aprops</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------------------------------+-------------+-------+
+| Property                        |       Value |  Unit |
++---------------------------------+-------------+-------+
+| Temperature                     |    303.1500 |     K |
+| Pressure                        |      5.0663 |   bar |
+| Ionic Strength (Effective)      |      1.0127 | molal |
+| Ionic Strength (Stoichiometric) |      1.0144 | molal |
+| pH                              |      7.0000 |       |
+| pE                              |     -2.4134 |       |
+| Eh                              |     -0.1452 |     V |
+| Alkalinity                      |      0.0076 |  eq/L |
+| Charge Molality                 | -1.1091e-16 | molal |
+| Element Molality:               |             |       |
+| :: C                            |  1.0525e-02 | molal |
+| :: Na                           |  1.0001e+00 | molal |
+| :: Cl                           |  1.0001e+00 | molal |
+| :: Ca                           |  4.8575e-03 | molal |
+| Species Molality:               |             |       |
+| :: CO3-2                        |  1.4603e-05 | molal |
+| :: H+                           |  1.3489e-07 | molal |
+| :: CO2                          |  8.8708e-04 | molal |
+| :: (CO2)2                       |  2.1409e-08 | molal |
+| :: HCO3-                        |  7.8249e-03 | molal |
+| :: CH4                          |  1.0001e-16 | molal |
+| :: Ca+2                         |  4.7329e-03 | molal |
+| :: CaCO3                        |  4.5248e-06 | molal |
+| :: CaHCO3+                      |  1.2005e-04 | molal |
+| :: CaOH+                        |  2.3414e-09 | molal |
+| :: Cl-                          |  1.0001e+00 | molal |
+| :: H2                           |  1.0001e-16 | molal |
+| :: Na+                          |  9.9841e-01 | molal |
+| :: NaCO3-                       |  5.8000e-05 | molal |
+| :: NaHCO3                       |  1.6156e-03 | molal |
+| :: OH-                          |  2.4708e-07 | molal |
+| :: NaOH                         |  1.0001e-16 | molal |
+| :: O2                           |  1.0001e-16 | molal |
+| Saturation Indices:             |             |       |
+| :: CH4(g)                       |    -13.7565 |     - |
+| :: CO2(g)                       |     -1.8192 |     - |
+| :: H2(g)                        |     -9.9372 |     - |
+| :: H2O(g)                       |     -1.7645 |     - |
+| :: O2(g)                        |    -63.9100 |     - |
+| :: Aragonite :: CaCO3           |     -0.1495 |     - |
+| :: Calcite :: CaCO3             |      0.0000 |     - |
+| :: Halite :: NaCl               |     -1.9301 |     - |
+| Saturation Ratios:              |             |       |
+| :: CH4(g)                       |  1.7518e-14 |     - |
+| :: CO2(g)                       |  1.5162e-02 |     - |
+| :: H2(g)                        |  1.1556e-10 |     - |
+| :: H2O(g)                       |  1.7198e-02 |     - |
+| :: O2(g)                        |  1.2304e-64 |     - |
+| :: Aragonite :: CaCO3           |  7.0878e-01 |     - |
+| :: Calcite :: CaCO3             |  1.0000e+00 |     - |
+| :: Halite :: NaCl               |  1.1745e-02 |     - |
++---------------------------------+-------------+-------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>The aqueous properties displayed above should show that the prescribed temperature, pressure, and pH values are satisfied.</p>
+<p>You may be wondering how much CO<sub>2</sub> was transferred to the system for this pH value to be attained. We show this next:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tCO2</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="nf">equilibrium</span><span class="p">()</span><span class="o">.</span><span class="nf">titrantAmount</span><span class="p">(</span><span class="s2">&quot;CO2&quot;</span><span class="p">)</span>  <span class="c1"># the amount of CO2 titrated into the system</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount of CO2 titrated into the system was </span><span class="si">{</span><span class="n">tCO2</span> <span class="o">*</span> <span class="mf">1e+3</span><span class="si">}</span><span class="s2"> mmol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Amount of CO2 titrated into the system was 5.666852117092365 mmol
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it. You should now be able to adapt these tutorials and define the constraints you want (if not already covered in the <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSpecs.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSpecs</span></code></a> class).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/equilibrium"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="equilibrium-with-fixed-volume-internal-energy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chemical equilibrium with fixed volume and internal energy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="equilibrium-with-given-component-amounts.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chemical equilibrium with given element and charge amounts</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-volume-and-internal-energy-constraints">Creating your own volume and internal energy constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-ph-constraint">Creating your own pH constraint</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

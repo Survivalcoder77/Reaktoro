@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config *)",
+      "Bash(find /Users/kangjaelee -maxdepth 3 -type d -name \"reaktoro\" -o -type d -name \"Reaktoro\" 2>/dev/null | grep -v \".venv\")",
+      "Read(//Users/kangjaelee/**)",
+      "Bash(pip list *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:reaktoro.org)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
