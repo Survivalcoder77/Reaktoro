@@ -1,4 +1,21 @@
-.venv/
+# Reference PDFs (copyrighted publisher material — keep local only)
+ref/
+!ref/mp-19017.json
+
+# Claude Code per-machine settings
+.claude/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS / editor
 .DS_Store
+.vscode/
+.idea/
+
+# Conda / venv
+.env/
+.venv/

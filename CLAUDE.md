@@ -86,14 +86,67 @@ props = ChemicalProps(state)
 aprops = AqueousProps(props)
 ```
 
-## Reaktoro 설치 (Installation)
+## 이 시스템의 Reaktoro 설치 상태 (Local Setup)
+
+이 머신에는 Reaktoro가 다음과 같이 설치되어 있습니다:
+
+- **Miniconda 위치**: `~/miniconda3/`
+- **conda 환경 이름**: `reaktoro` (전용 환경)
+- **Python 버전**: 3.12.13
+- **Reaktoro 버전**: 2.13.0
+- **conda 채널 설정**: `conda-forge` 전용 (`channel_priority: strict`, `~/.condarc`)
+- **튜토리얼 실습 코드 폴더**: `tutorials_py/` (예: `tutorials_py/01_importing_reaktoro.py`)
+
+## 환경 활성화 — 모든 Python/Reaktoro 명령은 이 환경에서 실행해야 함
+
+### 사용자 인터랙티브 셸에서
 
 ```bash
-# conda를 사용한 설치 (권장)
-conda install -c conda-forge reaktoro
+conda activate reaktoro     # 활성화 — 프롬프트가 (reaktoro)로 바뀜
+# ... 작업 ...
+conda deactivate            # 사용 종료
+```
 
-# 또는 pip
-pip install reaktoro
+### Claude Code(또는 비대화형 셸)에서 실행할 때
+
+Claude는 매번 새 Bash 세션에서 명령을 실행하므로 셸 상태가 유지되지 않습니다.
+따라서 **Reaktoro와 관련된 모든 Bash 명령에는 환경을 활성화하는 한 줄을 항상 앞에 붙여야 합니다**:
+
+```bash
+source ~/miniconda3/etc/profile.d/conda.sh && conda activate reaktoro && <실행할 명령>
+```
+
+예시 — 튜토리얼 스크립트 실행:
+
+```bash
+source ~/miniconda3/etc/profile.d/conda.sh && conda activate reaktoro && python tutorials_py/01_importing_reaktoro.py
+```
+
+예시 — Reaktoro 한 줄 테스트:
+
+```bash
+source ~/miniconda3/etc/profile.d/conda.sh && conda activate reaktoro && python -c "import reaktoro; print(reaktoro.__version__)"
+```
+
+> ⚠️ `conda activate reaktoro`만 단독으로 쓰면 비대화형 셸에서는 `conda: command not found` 오류가 나므로,
+> 반드시 `source ~/miniconda3/etc/profile.d/conda.sh`를 먼저 실행해야 합니다.
+
+## Reaktoro 재설치 / 다른 머신에 설치 (Installation Reference)
+
+이미 설치된 머신에서는 불필요하지만, 참고용으로 남겨둡니다:
+
+```bash
+# 1) Miniconda 설치 (Apple Silicon)
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+bash Miniconda3-latest-MacOSX-arm64.sh -b -p ~/miniconda3
+~/miniconda3/bin/conda init zsh
+
+# 2) conda-forge 전용 채널 설정
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+
+# 3) Reaktoro 환경 생성
+conda create -n reaktoro -c conda-forge --override-channels reaktoro python=3.12 -y
 ```
 
 ## 소스 코드 및 공식 문서
